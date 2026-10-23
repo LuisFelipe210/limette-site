@@ -11,22 +11,22 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
 <style>
 /* Layout: casca escura do ícone, gomos amarelos como único acento; a roda real do app é o herói */
-/* claro é o padrão; o escuro só entra pelo botão (data-theme="dark") */
+/* escuro é o padrão; o claro só entra pelo botão (data-theme="light") */
 :root{
-  --bg:#faf7ee; --surface:#ffffff; --raise:#f2ede0; --ink:#1d1a14; --muted:#6b6455; --line:#e5dece;
-  --lemon:#f6d32d; --lemon-soft:#f6d32d22; --lemon-ink:#231d00; --accent-text:#8a6c00; --glow:#fff6cc; --shadow:#5a4a1a40; --h1-accent:#1d1a14; --h1-mark:#f6d32d;
-  --glass-1:#ffffffd0; --glass-2:#ffffff80; --glass-border:#ffffffb0; --glass-hi:#ffffff; --glass-shadow:0 1px 2px #3a2f0a14, 0 12px 32px -8px #3a2f0a26;
-  --chip:#ffffffa0; --blob-1:#f6d32d; --blob-2:#ffb86b; --blob-op:.55;
+  --bg:#12100d; --surface:#1b1814; --raise:#24201a; --ink:#f5efe0; --muted:#a69d8a; --line:#2e2a23;
+  --lemon:#f6d32d; --lemon-soft:#f6d32d22; --lemon-ink:#231d00; --accent-text:#f6d32d; --glow:#2a241a; --shadow:#0009; --h1-accent:#f6d32d; --h1-mark:transparent;
+  --glass-1:#ffffff12; --glass-2:#ffffff06; --glass-border:#ffffff1c; --glass-hi:#ffffff1f; --glass-shadow:0 1px 2px #0006, 0 16px 40px -12px #000c;
+  --chip:#ffffff10; --blob-1:#f6d32d; --blob-2:#ffb86b; --blob-op:.2;
   --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --f-body:"Figtree", -apple-system, "Segoe UI", system-ui, sans-serif;
   --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  color-scheme:light;
+  color-scheme:dark;
 }
-:root[data-theme="dark"]{
-  --bg:#12100d; --surface:#1b1814; --raise:#24201a; --ink:#f5efe0; --muted:#a69d8a; --line:#2e2a23;
-  --accent-text:#f6d32d; --glow:#2a241a; --shadow:#0009; --h1-accent:#f6d32d; --h1-mark:transparent;
-  --glass-1:#ffffff12; --glass-2:#ffffff06; --glass-border:#ffffff1c; --glass-hi:#ffffff1f; --glass-shadow:0 1px 2px #0006, 0 16px 40px -12px #000c;
-  --chip:#ffffff10; --blob-op:.2; color-scheme:dark }
+:root[data-theme="light"]{
+  --bg:#faf7ee; --surface:#ffffff; --raise:#f2ede0; --ink:#1d1a14; --muted:#6b6455; --line:#e5dece;
+  --accent-text:#8a6c00; --glow:#fff6cc; --shadow:#5a4a1a40; --h1-accent:#1d1a14; --h1-mark:#f6d32d;
+  --glass-1:#ffffffd0; --glass-2:#ffffff80; --glass-border:#ffffffb0; --glass-hi:#ffffff; --glass-shadow:0 1px 2px #3a2f0a14, 0 12px 32px -8px #3a2f0a26;
+  --chip:#ffffffa0; --blob-op:.55; color-scheme:light }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -64,8 +64,9 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .theme{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer;padding:0}
 .theme:hover{background:var(--raise)}
 .theme svg{width:18px;height:18px}
-.theme .sun{display:none}
-:root[data-theme="dark"] .theme .sun{display:block} :root[data-theme="dark"] .theme .moon{display:none}@media (max-width:760px){nav .links{display:none} .theme{margin-left:auto}}
+.theme .moon{display:none}
+:root[data-theme="light"] .theme .moon{display:block} :root[data-theme="light"] .theme .sun{display:none}
+@media (max-width:760px){nav .links{display:none} .theme{margin-left:auto}}
 
 /* hero */
 .hero{padding-block:72px 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
@@ -488,7 +489,7 @@ async function loop(){
 const root = document.documentElement;
 try{ const t = localStorage.getItem("gomo-tema"); if(t) root.dataset.theme = t; }catch(e){}
 document.getElementById("theme").addEventListener("click", ()=>{
-  const dark = root.dataset.theme==="dark";
+  const dark = root.dataset.theme!=="light";
   root.dataset.theme = dark ? "light" : "dark";
   try{ localStorage.setItem("gomo-tema", root.dataset.theme); }catch(e){}
 });
