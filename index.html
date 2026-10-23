@@ -185,23 +185,23 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .faqgrid{margin-top:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);gap:56px;align-items:start}
 @media (max-width:900px){.faqgrid{grid-template-columns:1fr;gap:40px}}
 .faq{display:grid;gap:0}
-/* card ao lado das perguntas: contato e download, fica parado enquanto as perguntas rolam */
-.help{position:sticky;top:calc(env(safe-area-inset-top,0px) + 96px);border-radius:28px;padding:28px;display:grid;gap:18px;overflow:hidden;
-  background:linear-gradient(160deg,var(--glass-1),var(--glass-2));-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);
-  border:1px solid var(--glass-border);box-shadow:inset 0 1px 0 var(--glass-hi), var(--glass-shadow)}
-.help::before{content:"";position:absolute;width:260px;height:260px;right:-90px;top:-110px;border-radius:50%;background:var(--grad);filter:blur(40px);opacity:.35;pointer-events:none}
-.help img.icon{width:64px;height:64px;position:relative}
-.help h3{font-size:1.5rem;position:relative}
-.help p{color:var(--muted);position:relative}
-.mail{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--chip);border-radius:14px;padding:6px 6px 6px 14px;min-width:0;position:relative}
-.mail span{font-family:var(--f-mono);font-size:.85rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;user-select:all}
-.mail button{font:inherit;font-size:.82rem;font-weight:600;color:var(--ink);background:var(--raise);border:1px solid var(--line);border-radius:10px;padding:6px 12px;cursor:pointer;white-space:nowrap}
-.mail button:hover{background:var(--surface)}
-@media (max-width:440px){.mail{flex-wrap:wrap;padding:10px 12px}.mail span{flex-basis:100%;font-size:.8rem;white-space:normal;overflow-wrap:anywhere}.mail button{width:100%}}
-.help .facts{list-style:none;margin:0;padding:16px 0 0;border-top:1px solid var(--line);display:grid;gap:8px;font-size:.92rem;color:var(--muted);position:relative}
-.help .facts li{display:flex;gap:10px;align-items:center}
-.help .facts li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--grad);flex:none}
-.help .btn{justify-content:center;position:relative}
+/* desenho ao lado das perguntas: a fatia de limão do ícone, com arquivos em volta; fica parado enquanto as perguntas rolam */
+.lemon-side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 96px)}
+.art-lemon{width:100%;max-width:360px;height:auto;display:block;margin-inline:auto;overflow:visible}
+.art-lemon .slice{transform-box:view-box;transform-origin:180px 190px;filter:drop-shadow(0 18px 30px var(--shadow))}
+.art-lemon .chip rect{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.art-lemon .chip text{font-family:var(--f-mono);font-size:13px;font-weight:500;fill:var(--ink);text-anchor:middle}
+@media (prefers-reduced-motion:no-preference){
+  .art-lemon .slice{animation:spin 60s linear infinite}
+  .art-lemon .chip{animation:float 5s ease-in-out infinite}
+  .art-lemon .c2{animation-delay:-1.2s} .art-lemon .c3{animation-delay:-2.5s} .art-lemon .c4{animation-delay:-3.7s}
+  .art-lemon .cursor{animation:float 4s ease-in-out infinite -2s}
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{50%{transform:translateY(-8px)}}
+@media (max-width:900px){.lemon-side{position:static;max-width:300px;margin-inline:auto}}
+.faq-mail{color:var(--muted);margin-top:24px}
+.faq-mail a{color:var(--ink);font-weight:600;text-decoration-color:var(--lemon);text-underline-offset:3px;overflow-wrap:anywhere}
 .faq details{border-bottom:1px solid var(--line);padding-block:20px}
 .faq summary{cursor:pointer;list-style:none;font-weight:600;font-size:1.1rem;display:flex;justify-content:space-between;gap:16px}
 .faq summary::-webkit-details-marker{display:none}
@@ -437,15 +437,30 @@ footer .flinks a:hover{color:var(--ink)}
     <details><summary>Preciso instalar mais alguma coisa?</summary><p>Para vídeo e áudio o Limette usa o ffmpeg; no Windows ele mesmo instala quando precisa. Para DWG e STEP existe um gerenciador de extras que baixa o que falta com uma barra de progresso.</p></details>
     <details><summary>Dá para trocar as teclas?</summary><p>Dá. No menu do ícone você escolhe qual tecla abre cada roda.</p></details>
     <details><summary>Abre PPTX e planilhas sem o Office?</summary><p>Sim. O Limette lê e desenha PPTX, XLSX, DOCX e ODS sozinho. Só o PPT antigo e o Keynote precisam do app instalado.</p></details>
+    <p class="faq-mail">Não achou a sua pergunta? Escreva para <a href="mailto:contato.limette@gmail.com">contato.limette@gmail.com</a>.</p>
   </div>
-  <aside class="help" aria-label="Contato">
-    <img class="icon" src="icon.png" alt="">
-    <h3>Ainda com dúvida?</h3>
-    <p>Se a sua pergunta não está aqui, mande um e-mail.</p>
-    <div class="mail"><span id="mail">contato.limette@gmail.com</span><button type="button" id="copymail">Copiar</button></div>
-    <ul class="facts"><li>Sem conta e sem login</li><li>Funciona sem internet</li><li>Mac e Windows</li></ul>
-    <a class="btn primary" href="#baixar">Baixar o Limette</a>
-  </aside>
+  <div class="lemon-side">
+    <svg class="art-lemon" viewBox="0 0 360 400" role="img" aria-label="Uma fatia de limão com arquivos em volta">
+      <defs>
+        <radialGradient id="lglow" cx="50%" cy="48%" r="50%"><stop offset="0" stop-color="#f6d32d" stop-opacity=".35"/><stop offset="1" stop-color="#b3ed6b" stop-opacity="0"/></radialGradient>
+        <linearGradient id="lrind" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6d32d"/><stop offset="1" stop-color="#b3ed6b"/></linearGradient>
+      </defs>
+      <circle cx="180" cy="190" r="175" fill="url(#lglow)"/>
+      <circle class="orbit" cx="180" cy="190" r="160" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="4 8"/>
+      <g class="slice">
+        <circle cx="180" cy="190" r="134" fill="url(#lrind)"/>
+        <circle cx="180" cy="190" r="125" fill="#fffbe6"/>
+        <path d="M297.8 183.8 A118 118 0 0 0 267.7 111.0 L199.3 172.6 A26 26 0 0 1 206.0 188.6Z" fill="#ffd61a"/><path d="M259.0 102.3 A118 118 0 0 0 186.2 72.2 L181.4 164.0 A26 26 0 0 1 197.4 170.7Z" fill="#f5d925"/><path d="M173.8 72.2 A118 118 0 0 0 101.0 102.3 L162.6 170.7 A26 26 0 0 1 178.6 164.0Z" fill="#eadc30"/><path d="M92.3 111.0 A118 118 0 0 0 62.2 183.8 L154.0 188.6 A26 26 0 0 1 160.7 172.6Z" fill="#e0df3b"/><path d="M62.2 196.2 A118 118 0 0 0 92.3 269.0 L160.7 207.4 A26 26 0 0 1 154.0 191.4Z" fill="#d5e347"/><path d="M101.0 277.7 A118 118 0 0 0 173.8 307.8 L178.6 216.0 A26 26 0 0 1 162.6 209.3Z" fill="#e0df3b"/><path d="M186.2 307.8 A118 118 0 0 0 259.0 277.7 L197.4 209.3 A26 26 0 0 1 181.4 216.0Z" fill="#eadc30"/><path d="M267.7 269.0 A118 118 0 0 0 297.8 196.2 L206.0 191.4 A26 26 0 0 1 199.3 207.4Z" fill="#f5d925"/>
+        <circle cx="180" cy="190" r="20" fill="#fffbe6"/>
+        <g fill="#fffbe6" opacity=".9"><ellipse cx="222" cy="150" rx="5" ry="9" transform="rotate(40 222 150)"/><ellipse cx="140" cy="232" rx="5" ry="9" transform="rotate(40 140 232)"/><ellipse cx="226" cy="236" rx="4" ry="8" transform="rotate(-40 226 236)"/></g>
+      </g>
+      <g class="chip c1"><rect x="18" y="58" width="64" height="34" rx="10"/><text x="50" y="80">JPG</text></g>
+      <g class="chip c2"><rect x="270" y="40" width="64" height="34" rx="10"/><text x="302" y="62">PDF</text></g>
+      <g class="chip c3"><rect x="12" y="300" width="64" height="34" rx="10"/><text x="44" y="322">MP4</text></g>
+      <g class="chip c4"><rect x="278" y="318" width="64" height="34" rx="10"/><text x="310" y="340">DWG</text></g>
+      <g class="cursor"><path d="M288 236 L288 266 L296 258 L302 272 L308 269 L302 256 L313 256 Z" fill="#fff" stroke="#1b1e14" stroke-width="1.6" stroke-linejoin="round"/></g>
+    </svg>
+  </div>
   </div>
 </div></section>
 </main>
@@ -517,14 +532,6 @@ async function loop(){
     await wait(900);
   }
 }
-// copiar o e-mail de contato
-document.getElementById("copymail").addEventListener("click", async e => {
-  const b = e.currentTarget, mail = document.getElementById("mail").textContent;
-  try { await navigator.clipboard.writeText(mail); b.textContent = "Copiado"; }
-  catch { getSelection().selectAllChildren(document.getElementById("mail")); b.textContent = "Selecionado"; }
-  setTimeout(() => b.textContent = "Copiar", 1600);
-});
-
 // tema: segue o sistema até a pessoa escolher
 const root = document.documentElement;
 try{ const t = localStorage.getItem("limette-tema"); if(t) root.dataset.theme = t; }catch(e){}
