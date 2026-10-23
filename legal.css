@@ -1,15 +1,14 @@
 /* Páginas legais: mesmas cores e fontes do site, texto corrido numa coluna */
 :root{
-  --bg:#10120c; --surface:#191c14; --raise:#22261b; --ink:#f2f4e6; --muted:#a3a892; --line:#2b3024;
-  --lemon:#f6d32d; --lemon-ink:#231d00; --accent-text:#f6d32d;
+  --bg:#f8faee; --surface:#ffffff; --raise:#eef2e0; --ink:#1b1e14; --muted:#5f6652; --line:#dfe5cc;
+  --lemon:#f6d32d; --lemon-ink:#231d00; --accent-text:#6b7400;
   --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --f-body:"Figtree", -apple-system, "Segoe UI", system-ui, sans-serif;
   --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  color-scheme:dark;
+  color-scheme:light;
 }
-:root[data-theme="light"]{
-  --bg:#f8faee; --surface:#ffffff; --raise:#eef2e0; --ink:#1b1e14; --muted:#5f6652; --line:#dfe5cc;
-  --accent-text:#6b7400; color-scheme:light }
+:root[data-theme="dark"]{
+  --bg:#10120c; --surface:#191c14; --raise:#22261b; --ink:#f2f4e6; --muted:#a3a892; --line:#2b3024; --accent-text:#f6d32d; color-scheme:dark }
 *{box-sizing:border-box}
 html{overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
@@ -30,8 +29,8 @@ nav .back:hover{color:var(--ink)}
 h1,h2{font-family:var(--f-display);text-wrap:balance;letter-spacing:-.02em;margin:0}
 h1{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:800;line-height:1.05;margin-top:12px}
 .updated{color:var(--muted);margin-top:12px;font-size:.95rem}
-.summary{margin-top:36px;padding:22px 24px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(160deg,#ffffff12,#ffffff06)}
-:root[data-theme="light"] .summary{background:#ffffffc0}
+.summary{margin-top:36px;padding:22px 24px;border-radius:20px;border:1px solid var(--line);background:#ffffffc0}
+:root[data-theme="dark"] .summary{background:linear-gradient(160deg,#ffffff12,#ffffff06)}
 .summary b{display:block;font-family:var(--f-display);font-size:1.05rem;margin-bottom:6px}
 .summary ul{margin:0;padding-left:20px;color:var(--muted)}
 h2{font-size:1.45rem;font-weight:700;margin-top:48px;padding-top:24px;border-top:1px solid var(--line)}

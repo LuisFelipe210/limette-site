@@ -11,23 +11,20 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
 <style>
 /* Layout: casca escura do ícone, gomos do amarelo ao verde-claro como único acento; a roda real do app é o herói */
-/* escuro é o padrão; o claro só entra pelo botão (data-theme="light") */
+/* claro é o padrão; o escuro só entra pelo botão (data-theme="dark") */
 :root{
-  --bg:#10120c; --surface:#191c14; --raise:#22261b; --ink:#f2f4e6; --muted:#a3a892; --line:#2b3024;
+  --bg:#f8faee; --surface:#ffffff; --raise:#eef2e0; --ink:#1b1e14; --muted:#5f6652; --line:#dfe5cc;
   --lime:#b3ed6b; --grad:linear-gradient(120deg,#f6d32d 0%,#d4e85a 60%,#b3ed6b 100%);
-  --lemon:#f6d32d; --lemon-soft:#f6d32d22; --lemon-ink:#231d00; --accent-text:#f6d32d; --glow:#232a17; --shadow:#0009; --h1-accent:#f6d32d; --h1-mark:transparent;
-  --glass-1:#ffffff12; --glass-2:#ffffff06; --glass-border:#ffffff1c; --glass-hi:#ffffff1f; --glass-shadow:0 1px 2px #0006, 0 16px 40px -12px #000c;
-  --chip:#ffffff10; --blob-1:#f6d32d; --blob-2:#b3ed6b; --blob-op:.2;
+  --lemon:#f6d32d; --lemon-soft:#f6d32d22; --lemon-ink:#231d00; --accent-text:#6b7400; --glow:#f2fbcf; --shadow:#5a4a1a40; --h1-accent:#1b1e14; --h1-mark:#f6d32d;
+  --glass-1:#ffffffd0; --glass-2:#ffffff80; --glass-border:#ffffffb0; --glass-hi:#ffffff; --glass-shadow:0 1px 2px #3a2f0a14, 0 12px 32px -8px #3a2f0a26;
+  --chip:#ffffffa0; --blob-1:#f6d32d; --blob-2:#b3ed6b; --blob-op:.55;
   --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --f-body:"Figtree", -apple-system, "Segoe UI", system-ui, sans-serif;
   --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  color-scheme:dark;
+  color-scheme:light;
 }
-:root[data-theme="light"]{
-  --bg:#f8faee; --surface:#ffffff; --raise:#eef2e0; --ink:#1b1e14; --muted:#5f6652; --line:#dfe5cc;
-  --accent-text:#6b7400; --glow:#f2fbcf; --shadow:#5a4a1a40; --h1-accent:#1b1e14; --h1-mark:#f6d32d;
-  --glass-1:#ffffffd0; --glass-2:#ffffff80; --glass-border:#ffffffb0; --glass-hi:#ffffff; --glass-shadow:0 1px 2px #3a2f0a14, 0 12px 32px -8px #3a2f0a26;
-  --chip:#ffffffa0; --blob-op:.55; color-scheme:light }
+:root[data-theme="dark"]{
+  --bg:#10120c; --surface:#191c14; --raise:#22261b; --ink:#f2f4e6; --muted:#a3a892; --line:#2b3024; --accent-text:#f6d32d; --glow:#232a17; --shadow:#0009; --h1-accent:#f6d32d; --h1-mark:transparent; --glass-1:#ffffff12; --glass-2:#ffffff06; --glass-border:#ffffff1c; --glass-hi:#ffffff1f; --glass-shadow:0 1px 2px #0006, 0 16px 40px -12px #000c; --chip:#ffffff10; --blob-op:.2; color-scheme:dark }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -65,15 +62,15 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .theme{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer;padding:0}
 .theme:hover{background:var(--raise)}
 .theme svg{width:18px;height:18px}
-.theme .moon{display:none}
-:root[data-theme="light"] .theme .moon{display:block} :root[data-theme="light"] .theme .sun{display:none}
+.theme .sun{display:none}
+:root[data-theme="dark"] .theme .sun{display:block} :root[data-theme="dark"] .theme .moon{display:none}
 @media (max-width:760px){nav .links{display:none} .theme{margin-left:auto}}
 
 /* hero */
 .hero{padding-block:72px 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
 .hero .copy{display:grid;gap:24px}
-.hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-:root[data-theme="light"] .hero h1 span{color:var(--h1-accent);-webkit-background-clip:border-box;background:linear-gradient(90deg,#f6d32d,#b3ed6b) 0 82%/100% 34% no-repeat;padding-inline:.04em}
+.hero h1 span{color:var(--h1-accent);background:linear-gradient(90deg,#f6d32d,#b3ed6b) 0 82%/100% 34% no-repeat;padding-inline:.04em}
+:root[data-theme="dark"] .hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-inline:0}
 .ctas{display:flex;flex-wrap:wrap;gap:12px}
 .note{font-size:.88rem;color:var(--muted)}
 @media (max-width:900px){.hero{grid-template-columns:1fr}}
@@ -531,7 +528,7 @@ document.getElementById("copymail").addEventListener("click", async e => {
 const root = document.documentElement;
 try{ const t = localStorage.getItem("limette-tema"); if(t) root.dataset.theme = t; }catch(e){}
 document.getElementById("theme").addEventListener("click", ()=>{
-  const dark = root.dataset.theme!=="light";
+  const dark = root.dataset.theme==="dark";
   root.dataset.theme = dark ? "light" : "dark";
   try{ localStorage.setItem("limette-tema", root.dataset.theme); }catch(e){}
 });
