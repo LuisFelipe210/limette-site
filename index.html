@@ -15,6 +15,8 @@
 :root{
   --bg:#faf7ee; --surface:#ffffff; --raise:#f2ede0; --ink:#1d1a14; --muted:#6b6455; --line:#e5dece;
   --lemon:#f6d32d; --lemon-soft:#f6d32d22; --lemon-ink:#231d00; --accent-text:#8a6c00; --glow:#fff6cc; --shadow:#5a4a1a40; --h1-accent:#1d1a14; --h1-mark:#f6d32d;
+  --glass-1:#ffffffd0; --glass-2:#ffffff80; --glass-border:#ffffffb0; --glass-hi:#ffffff; --glass-shadow:0 1px 2px #3a2f0a14, 0 12px 32px -8px #3a2f0a26;
+  --chip:#ffffffa0; --blob-1:#f6d32d; --blob-2:#ffb86b; --blob-op:.55;
   --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --f-body:"Figtree", -apple-system, "Segoe UI", system-ui, sans-serif;
   --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
@@ -22,7 +24,9 @@
 }
 :root[data-theme="dark"]{
   --bg:#12100d; --surface:#1b1814; --raise:#24201a; --ink:#f5efe0; --muted:#a69d8a; --line:#2e2a23;
-  --accent-text:#f6d32d; --glow:#2a241a; --shadow:#0009; --h1-accent:#f6d32d; --h1-mark:transparent; color-scheme:dark }
+  --accent-text:#f6d32d; --glow:#2a241a; --shadow:#0009; --h1-accent:#f6d32d; --h1-mark:transparent;
+  --glass-1:#ffffff12; --glass-2:#ffffff06; --glass-border:#ffffff1c; --glass-hi:#ffffff1f; --glass-shadow:0 1px 2px #0006, 0 16px 40px -12px #000c;
+  --chip:#ffffff10; --blob-op:.2; color-scheme:dark }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -105,7 +109,7 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .head{display:grid;gap:16px;max-width:760px}
 .trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:56px}
 @media (max-width:900px){.trio{grid-template-columns:1fr}}
-.mode{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:24px;display:grid;gap:14px;align-content:start}
+.mode{border-radius:24px;padding:24px;display:grid;gap:14px;align-content:start}
 .mode img{width:100%;max-width:340px;margin:0 auto;display:block}
 .mode .key{display:flex;align-items:center;gap:12px}
 .mode .key kbd{font-size:1.3rem;padding:6px 14px}
@@ -113,21 +117,35 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .mode .win{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
 
 /* where does it go */
-.picker{margin-top:48px;display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:28px}
+.picker{margin-top:48px;display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:28px;border-radius:28px;padding:28px}
 @media (max-width:760px){.picker{grid-template-columns:1fr}}
 .from{display:flex;flex-wrap:wrap;gap:8px;align-content:start}
-.from button{font:inherit;font-family:var(--f-mono);font-size:.85rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer}
+.from button{font:inherit;font-family:var(--f-mono);font-size:.85rem;color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer}
 .from button[aria-pressed="true"]{background:var(--lemon);color:var(--lemon-ink);border-color:var(--lemon)}
 .to{display:grid;gap:18px;align-content:start;min-width:0}
 .to .row{display:grid;gap:8px}
 .to .lbl{font-size:.8rem;color:var(--muted);display:flex;gap:8px;align-items:center}
 .to .chips{display:flex;flex-wrap:wrap;gap:6px}
-.to .chips span{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.88rem;background:var(--bg)}
+.to .chips span{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.88rem;background:var(--chip)}
 .to .chips.conv span{font-family:var(--f-mono);font-size:.8rem}
+
+
+/* vidro: cards translúcidos sobre manchas de limão */
+.mode,.picker,.card,.plat,.art{background:linear-gradient(160deg,var(--glass-1),var(--glass-2));-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);
+  border:1px solid var(--glass-border);box-shadow:inset 0 1px 0 var(--glass-hi), var(--glass-shadow)}
+#como,#recursos,#baixar{position:relative;isolation:isolate}
+#como::before,#como::after,#recursos::before,#recursos::after,#baixar::before{content:"";position:absolute;z-index:-1;width:520px;height:520px;max-width:90vw;max-height:90vw;border-radius:50%;filter:blur(90px);opacity:var(--blob-op);pointer-events:none;background:var(--blob-1)}
+#como::before{left:-140px;top:320px}
+#como::after{right:-120px;top:760px;background:var(--blob-2);opacity:calc(var(--blob-op) * .7)}
+#recursos::before{right:-160px;top:240px}
+#recursos::after{left:-140px;top:1000px;background:var(--blob-2);opacity:calc(var(--blob-op) * .7)}
+#baixar::before{left:35%;top:220px;width:440px;height:440px}
+.ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:var(--ink);background:var(--chip);border:1px solid var(--glass-border);box-shadow:inset 0 1px 0 var(--glass-hi), 0 2px 8px #3a2f0a1a}
+.ico svg{width:22px;height:22px}
 
 /* features bento */
 .bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px;margin-top:56px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:28px;display:grid;gap:14px;align-content:start;grid-column:span 2;min-width:0}
+.card{border-radius:24px;padding:28px;display:grid;gap:14px;align-content:start;grid-column:span 2;min-width:0}
 .card.wide{grid-column:span 3}
 .card ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;color:var(--muted);font-size:.95rem}
 .card li{display:grid;grid-template-columns:14px 1fr;gap:10px}
@@ -156,7 +174,7 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 /* platforms + download */
 .plats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:48px}
 @media (max-width:760px){.plats{grid-template-columns:1fr}}
-.plat{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:28px;display:grid;gap:18px;align-content:start}
+.plat{border-radius:24px;padding:28px;display:grid;gap:18px;align-content:start}
 .plat dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:.95rem}
 .plat dt{color:var(--muted)}
 .plat dd{margin:0}
@@ -259,40 +277,40 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
     <p class="lede">Mais de 50 formatos e mais de 140 funções, de foto a planta de engenharia.</p>
   </div>
   <div class="bento">
-    <div class="card wide"><span class="tag">Imagens</span><h3>Edite sem abrir um editor</h3><ul>
+    <div class="card wide"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg></div><span class="tag">Imagens</span><h3>Edite sem abrir um editor</h3><ul>
       <li>Ajustes de luz e cor, 8 estilos, nitidez, granulação e redução de ruído</li>
       <li>Recortar, anotar com setas, textos e números</li>
       <li>Fundo em cor, gradiente ou outra imagem, com margem e sombra</li>
       <li>Comprimir até 200 KB, 500 KB, 1 MB ou o tamanho que quiser</li>
       <li>Tirar o fundo, copiar o texto (OCR) e ler QR Code</li>
       <li>Colagens em grade, linha, coluna ou destaque</li></ul></div>
-    <div class="card wide"><span class="tag">PDF</span><h3>O PDF inteiro na ponta do cursor</h3><ul>
+    <div class="card wide"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14h6M9 17h4"/></svg></div><span class="tag">PDF</span><h3>O PDF inteiro na ponta do cursor</h3><ul>
       <li>Organizar páginas numa grade: reordenar, girar, duplicar, excluir</li>
       <li>Assinar com a assinatura desenhada ou tirada de uma foto</li>
       <li>Tarja definitiva, que apaga o texto de verdade</li>
       <li>Juntar, separar e comprimir</li>
       <li>Para Word, Excel, PowerPoint, EPUB, Markdown ou imagens até 300 DPI</li></ul></div>
-    <div class="card"><span class="tag">Vídeo</span><h3>Corte, junte, acelere</h3><ul>
+    <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></div><span class="tag">Vídeo</span><h3>Corte, junte, acelere</h3><ul>
       <li>MP4, MOV, WebM, MKV, AVI, WMV e GIF</li>
       <li>Cortar, dividir, juntar e enquadrar em 9:16</li>
       <li>Velocidade de 0,25× a 4×</li>
       <li>Ocultar rostos e placas em trechos</li></ul></div>
-    <div class="card"><span class="tag">Áudio</span><h3>Som no ponto certo</h3><ul>
+    <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></div><span class="tag">Áudio</span><h3>Som no ponto certo</h3><ul>
       <li>MP3, M4A, WAV, FLAC, OGG, Opus e AIFF</li>
       <li>Normalizar, cortar e juntar faixas</li>
       <li>Bipe de censura marcado na onda</li>
       <li>Vídeo com a forma de onda animada</li></ul></div>
-    <div class="card"><span class="tag">Documentos</span><h3>Texto, planilha, slide</h3><ul>
+    <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M5 9h14M5 14h9M5 19h6"/></svg></div><span class="tag">Documentos</span><h3>Texto, planilha, slide</h3><ul>
       <li>Word, PDF, ODT, HTML, Markdown e EPUB</li>
       <li>Planilhas para CSV, PDF e JSON, com todas as abas</li>
       <li>PPTX para PDF sem o PowerPoint</li>
       <li>Narrar o documento em áudio</li></ul></div>
-    <div class="card wide"><span class="tag">Engenharia</span><h3>Planta DWG sem AutoCAD</h3><ul>
+    <div class="card wide"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></div><span class="tag">Engenharia</span><h3>Planta DWG sem AutoCAD</h3><ul>
       <li>DWG e DXF para PDF vetorial, SVG, PNG, JPG e TIFF</li>
       <li>Cotas, hachuras, blocos, textos e tracejados</li>
       <li>Trocar a versão do DWG e salvar para SketchUp</li>
       <li>STEP e IGES para STL, com prévia em imagem</li></ul></div>
-    <div class="card wide"><span class="tag">Para quem programa</span><h3>Os utilitários de todo dia</h3><ul>
+    <div class="card wide"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 4l-4 16"/></svg></div><span class="tag">Para quem programa</span><h3>Os utilitários de todo dia</h3><ul>
       <li>SVG para React ou SwiftUI, e PNG em @1x, @2x e @3x</li>
       <li>Otimizar SVG sem mudar o desenho</li>
       <li>Hash SHA-256, MD5 e SHA-1, com conferência</li>
@@ -303,7 +321,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
   <div class="spot">
     <div class="art" aria-hidden="true">
       <svg viewBox="0 0 400 300">
-        <rect width="400" height="300" style="fill:var(--surface)"/>
+        <rect width="400" height="300" fill="none"/>
         <rect x="70" y="26" width="260" height="250" rx="6" fill="#f4efe3"/>
         <g font-family="Figtree,sans-serif" font-size="11" fill="#3b362c">
           <text x="92" y="58" font-weight="700" font-size="13">Contrato de prestação de serviço</text>
