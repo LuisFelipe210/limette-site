@@ -1,6 +1,6 @@
 /* Páginas legais: mesmas cores e fontes do site, texto corrido numa coluna */
 :root{
-  --bg:#12100d; --surface:#1b1814; --raise:#24201a; --ink:#f5efe0; --muted:#a69d8a; --line:#2e2a23;
+  --bg:#10120c; --surface:#191c14; --raise:#22261b; --ink:#f2f4e6; --muted:#a3a892; --line:#2b3024;
   --lemon:#f6d32d; --lemon-ink:#231d00; --accent-text:#f6d32d;
   --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --f-body:"Figtree", -apple-system, "Segoe UI", system-ui, sans-serif;
@@ -8,8 +8,8 @@
   color-scheme:dark;
 }
 :root[data-theme="light"]{
-  --bg:#faf7ee; --surface:#ffffff; --raise:#f2ede0; --ink:#1d1a14; --muted:#6b6455; --line:#e5dece;
-  --accent-text:#8a6c00; color-scheme:light }
+  --bg:#f8faee; --surface:#ffffff; --raise:#eef2e0; --ink:#1b1e14; --muted:#5f6652; --line:#dfe5cc;
+  --accent-text:#6b7400; color-scheme:light }
 *{box-sizing:border-box}
 html{overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}

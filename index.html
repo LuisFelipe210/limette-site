@@ -3,28 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Gomo</title>
+<title>Limette</title>
 <meta name="description" content="Arraste um arquivo, aperte uma tecla e escolha na roda. Converter, comprimir, tarjar e assinar no Mac e no Windows, sem internet.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-/* Layout: casca escura do ícone, gomos amarelos como único acento; a roda real do app é o herói */
+/* Layout: casca escura do ícone, gomos do amarelo ao verde-claro como único acento; a roda real do app é o herói */
 /* escuro é o padrão; o claro só entra pelo botão (data-theme="light") */
 :root{
-  --bg:#12100d; --surface:#1b1814; --raise:#24201a; --ink:#f5efe0; --muted:#a69d8a; --line:#2e2a23;
-  --lemon:#f6d32d; --lemon-soft:#f6d32d22; --lemon-ink:#231d00; --accent-text:#f6d32d; --glow:#2a241a; --shadow:#0009; --h1-accent:#f6d32d; --h1-mark:transparent;
+  --bg:#10120c; --surface:#191c14; --raise:#22261b; --ink:#f2f4e6; --muted:#a3a892; --line:#2b3024;
+  --lime:#b3ed6b; --grad:linear-gradient(120deg,#f6d32d 0%,#d4e85a 60%,#b3ed6b 100%);
+  --lemon:#f6d32d; --lemon-soft:#f6d32d22; --lemon-ink:#231d00; --accent-text:#f6d32d; --glow:#232a17; --shadow:#0009; --h1-accent:#f6d32d; --h1-mark:transparent;
   --glass-1:#ffffff12; --glass-2:#ffffff06; --glass-border:#ffffff1c; --glass-hi:#ffffff1f; --glass-shadow:0 1px 2px #0006, 0 16px 40px -12px #000c;
-  --chip:#ffffff10; --blob-1:#f6d32d; --blob-2:#ffb86b; --blob-op:.2;
+  --chip:#ffffff10; --blob-1:#f6d32d; --blob-2:#b3ed6b; --blob-op:.2;
   --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --f-body:"Figtree", -apple-system, "Segoe UI", system-ui, sans-serif;
   --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   color-scheme:dark;
 }
 :root[data-theme="light"]{
-  --bg:#faf7ee; --surface:#ffffff; --raise:#f2ede0; --ink:#1d1a14; --muted:#6b6455; --line:#e5dece;
-  --accent-text:#8a6c00; --glow:#fff6cc; --shadow:#5a4a1a40; --h1-accent:#1d1a14; --h1-mark:#f6d32d;
+  --bg:#f8faee; --surface:#ffffff; --raise:#eef2e0; --ink:#1b1e14; --muted:#5f6652; --line:#dfe5cc;
+  --accent-text:#6b7400; --glow:#f2fbcf; --shadow:#5a4a1a40; --h1-accent:#1b1e14; --h1-mark:#f6d32d;
   --glass-1:#ffffffd0; --glass-2:#ffffff80; --glass-border:#ffffffb0; --glass-hi:#ffffff; --glass-shadow:0 1px 2px #3a2f0a14, 0 12px 32px -8px #3a2f0a26;
   --chip:#ffffffa0; --blob-op:.55; color-scheme:light }
 *{box-sizing:border-box}
@@ -44,8 +45,8 @@ kbd{font-family:var(--f-mono);font-size:.82em;background:var(--raise);border:1px
 .lede{font-size:clamp(1.1rem,2vw,1.3rem);color:var(--muted);max-width:52ch}
 .btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:14px 24px;font-weight:600;text-decoration:none;border:1px solid var(--line);background:var(--surface);transition:transform .15s, background .15s}
 .btn:hover{transform:translateY(-1px);background:var(--raise)}
-.btn.primary{background:var(--lemon);color:var(--lemon-ink);border-color:var(--lemon)}
-.btn.primary:hover{background:#ffe04a}
+.btn.primary{background:var(--grad);color:var(--lemon-ink);border-color:transparent}
+.btn.primary:hover{filter:brightness(1.06)}
 .btn small{font-family:var(--f-mono);font-size:.72rem;opacity:.7;font-weight:500}
 :focus-visible{outline:3px solid var(--lemon);outline-offset:3px}
 section{padding-block:120px 0}
@@ -71,7 +72,8 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 /* hero */
 .hero{padding-block:72px 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
 .hero .copy{display:grid;gap:24px}
-.hero h1 span{color:var(--h1-accent);background:linear-gradient(transparent 58%, var(--h1-mark) 58%, var(--h1-mark) 92%, transparent 92%);padding-inline:.04em}
+.hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+:root[data-theme="light"] .hero h1 span{color:var(--h1-accent);-webkit-background-clip:border-box;background:linear-gradient(90deg,#f6d32d,#b3ed6b) 0 82%/100% 34% no-repeat;padding-inline:.04em}
 .ctas{display:flex;flex-wrap:wrap;gap:12px}
 .note{font-size:.88rem;color:var(--muted)}
 @media (max-width:900px){.hero{grid-template-columns:1fr}}
@@ -150,7 +152,7 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .card.wide{grid-column:span 3}
 .card ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;color:var(--muted);font-size:.95rem}
 .card li{display:grid;grid-template-columns:14px 1fr;gap:10px}
-.card li::before{content:"";width:7px;height:7px;margin-top:.62em;border-radius:50%;background:var(--lemon)}
+.card li::before{content:"";width:7px;height:7px;margin-top:.62em;border-radius:50%;background:var(--grad)}
 .card .tag{font-family:var(--f-mono);font-size:.72rem;color:var(--accent-text)}
 @media (max-width:980px){.card,.card.wide{grid-column:span 3}}
 @media (max-width:640px){.bento{grid-template-columns:1fr}.card,.card.wide{grid-column:auto}}
@@ -166,7 +168,7 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .art svg{width:100%;height:100%;display:block}
 
 /* privacy */
-.priv{border-radius:32px;background:var(--lemon);color:var(--lemon-ink);padding:clamp(32px,6vw,72px);display:grid;gap:20px;position:relative;overflow:hidden}
+.priv{border-radius:32px;background:var(--grad);color:var(--lemon-ink);padding:clamp(32px,6vw,72px);display:grid;gap:20px;position:relative;overflow:hidden}
 .priv h2{font-size:clamp(2.4rem,6vw,4.6rem);max-width:14ch}
 .priv p{max-width:56ch;font-size:1.1rem}
 .priv .seg{position:absolute;right:-120px;bottom:-120px;width:420px;opacity:.16}
@@ -201,7 +203,7 @@ footer .flinks a:hover{color:var(--ink)}
 <body>
 
 <nav class="g"><div class="wrap">
-  <a class="brand" href="#top"><img src="icon.png" alt="">Gomo</a>
+  <a class="brand" href="#top"><img src="icon.png" alt="">Limette</a>
   <div class="links"><a href="#como">Como funciona</a><a href="#recursos">Recursos</a><a href="#privacidade">Privacidade</a><a href="#perguntas">Perguntas</a></div>
   <button class="theme" id="theme" type="button" aria-label="Trocar entre modo claro e escuro">
     <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
@@ -217,18 +219,18 @@ footer .flinks a:hover{color:var(--ink)}
     <h1>Arraste.<br>Aperte.<br><span>Pronto.</span></h1>
     <p class="lede">Comece a arrastar um arquivo, aperte uma tecla e uma roda aparece em volta do cursor. Solte numa fatia e o arquivo sai convertido, comprimido, tarjado ou assinado, sem abrir nenhum programa.</p>
     <div class="ctas">
-      <a class="btn primary" href="#baixar">Baixar o Gomo</a>
+      <a class="btn primary" href="#baixar">Baixar o Limette</a>
       <a class="btn" href="#como">Ver como funciona</a>
     </div>
     <p class="note">Tudo acontece no seu computador. Nenhum arquivo vai para a internet.</p>
   </div>
 
-  <div class="stage" id="stage" aria-label="Demonstração: um arquivo é arrastado, uma tecla é apertada e a roda do Gomo aparece">
+  <div class="stage" id="stage" aria-label="Demonstração: um arquivo é arrastado, uma tecla é apertada e a roda do Limette aparece">
     <div class="dots"></div>
     <div class="caption" id="cap">foto.jpg</div>
-    <img class="wheel" data-w="0" src="img/roda-convert.png" alt="Roda Converter do Gomo">
-    <img class="wheel" data-w="1" src="img/roda-tools.png" alt="Roda Ferramentas do Gomo">
-    <img class="wheel" data-w="2" src="img/roda-actions.png" alt="Roda Ações do Gomo">
+    <img class="wheel" data-w="0" src="img/roda-convert.png" alt="Roda Converter do Limette">
+    <img class="wheel" data-w="1" src="img/roda-tools.png" alt="Roda Ferramentas do Limette">
+    <img class="wheel" data-w="2" src="img/roda-actions.png" alt="Roda Ações do Limette">
     <div class="file" id="file"><div class="doc"><b>JPG</b></div><div class="name">foto.jpg</div></div>
     <svg class="cursor" id="cursor" viewBox="0 0 22 30" aria-hidden="true"><path d="M2 2 L2 24 L8 18 L12 28 L16 26 L12 17 L20 17 Z" fill="#fff" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/></svg>
     <div class="keys"><kbd data-k="0">⇧</kbd><kbd data-k="1">⌘</kbd><kbd data-k="2">⌃</kbd></div>
@@ -344,7 +346,7 @@ footer .flinks a:hover{color:var(--ink)}
     <div class="txt">
       <div class="eyebrow">PDF · tarjar e assinar</div>
       <h2>A tarja que não volta.</h2>
-      <p>O Gomo procura CPF, CNPJ, e-mail, telefone e cartão sozinho. Quando você salva, o texto embaixo da tarja é apagado e a página é refeita, então ninguém consegue copiar ou recuperar o que foi coberto. Depois ele confere se ficou mesmo limpo.</p>
+      <p>O Limette procura CPF, CNPJ, e-mail, telefone e cartão sozinho. Quando você salva, o texto embaixo da tarja é apagado e a página é refeita, então ninguém consegue copiar ou recuperar o que foi coberto. Depois ele confere se ficou mesmo limpo.</p>
       <p>Na mesma janela você assina: desenhe com o trackpad ou tire a assinatura de uma foto do papel.</p>
     </div>
   </div>
@@ -368,7 +370,7 @@ footer .flinks a:hover{color:var(--ink)}
     <div class="txt">
       <div class="eyebrow">Engenharia · DWG e DXF</div>
       <h2>Mande a planta para quem não tem AutoCAD.</h2>
-      <p>Arraste o DWG, aperte <kbd>⇧</kbd> e solte em PDF. O Gomo desenha linhas, arcos, cotas, hachuras, blocos e textos com traço fino de 0,05 mm, pronto para imprimir ou mandar pelo WhatsApp.</p>
+      <p>Arraste o DWG, aperte <kbd>⇧</kbd> e solte em PDF. O Limette desenha linhas, arcos, cotas, hachuras, blocos e textos com traço fino de 0,05 mm, pronto para imprimir ou mandar pelo WhatsApp.</p>
       <p>Também converte DXF para DWG, troca a versão do DWG e gera o modelo do SketchUp.</p>
     </div>
   </div>
@@ -381,7 +383,7 @@ footer .flinks a:hover{color:var(--ink)}
       <path d="M50 50 L46 94 A44 44 0 0 1 19 81 Z"/><path d="M50 50 L16 78 A44 44 0 0 1 6 50 Z"/><path d="M50 50 L6 46 A44 44 0 0 1 19 19 Z"/><path d="M50 50 L22 16 A44 44 0 0 1 46 6 Z"/></g></svg>
     <div class="eyebrow" style="color:var(--lemon-ink)">Privacidade</div>
     <h2>Seus arquivos não saem do computador.</h2>
-    <p>Nada de site de conversão, nada de upload, nada de conta. Contratos, documentos com CPF, fotos da família e plantas de cliente são processados ali mesmo, e o Gomo funciona até sem internet.</p>
+    <p>Nada de site de conversão, nada de upload, nada de conta. Contratos, documentos com CPF, fotos da família e plantas de cliente são processados ali mesmo, e o Limette funciona até sem internet.</p>
   </div>
 </div></section>
 
@@ -402,8 +404,8 @@ footer .flinks a:hover{color:var(--ink)}
       <h3>Windows</h3>
       <dl><dt>Sistema</dt><dd>Windows 10 ou 11</dd><dt>Processador</dt><dd>Intel/AMD (x64) ou ARM</dd><dt>Teclas</dt><dd><kbd>Shift</kbd> <kbd>Ctrl</kbd> <kbd>Alt</kbd></dd><dt>Atualização</dt><dd>automática, uma vez por dia</dd></dl>
       <div class="btns">
-        <a class="btn primary" href="https://github.com/LuisFelipe210/gomo-releases/releases/latest/download/Gomo.exe">Baixar para Windows <small>x64</small></a>
-        <a class="btn" href="https://github.com/LuisFelipe210/gomo-releases/releases/latest/download/Gomo-ARM64.exe">ARM <small>ARM64</small></a>
+        <a class="btn primary" href="https://github.com/LuisFelipe210/limette-releases/releases/latest/download/Limette.exe">Baixar para Windows <small>x64</small></a>
+        <a class="btn" href="https://github.com/LuisFelipe210/limette-releases/releases/latest/download/Limette-ARM64.exe">ARM <small>ARM64</small></a>
       </div>
     </div>
   </div>
@@ -415,15 +417,15 @@ footer .flinks a:hover{color:var(--ink)}
     <details><summary>Precisa de internet?</summary><p>Não. Todas as conversões e ferramentas rodam no seu computador. A internet só é usada no Windows para procurar atualização, uma vez por dia.</p></details>
     <details><summary>Funciona arrastando de qualquer lugar?</summary><p>Sim: do Finder ou Explorador, da mesa, do navegador, do e-mail. Basta começar a arrastar e apertar a tecla antes de soltar. A roda também aceita as teclas 1 a 9, as setas, Enter e Esc.</p></details>
     <details><summary>Onde fica o arquivo novo?</summary><p>Ao lado do original, com outro nome. Se a pasta não deixar gravar, ele vai para Downloads. O original nunca é alterado.</p></details>
-    <details><summary>Preciso instalar mais alguma coisa?</summary><p>Para vídeo e áudio o Gomo usa o ffmpeg; no Windows ele mesmo instala quando precisa. Para DWG e STEP existe um gerenciador de extras que baixa o que falta com uma barra de progresso.</p></details>
+    <details><summary>Preciso instalar mais alguma coisa?</summary><p>Para vídeo e áudio o Limette usa o ffmpeg; no Windows ele mesmo instala quando precisa. Para DWG e STEP existe um gerenciador de extras que baixa o que falta com uma barra de progresso.</p></details>
     <details><summary>Dá para trocar as teclas?</summary><p>Dá. No menu do ícone você escolhe qual tecla abre cada roda.</p></details>
-    <details><summary>Abre PPTX e planilhas sem o Office?</summary><p>Sim. O Gomo lê e desenha PPTX, XLSX, DOCX e ODS sozinho. Só o PPT antigo e o Keynote precisam do app instalado.</p></details>
+    <details><summary>Abre PPTX e planilhas sem o Office?</summary><p>Sim. O Limette lê e desenha PPTX, XLSX, DOCX e ODS sozinho. Só o PPT antigo e o Keynote precisam do app instalado.</p></details>
   </div>
 </div></section>
 </main>
 
 <footer class="g"><div class="wrap">
-  <a class="brand" href="#top"><img src="icon.png" alt="">Gomo</a>
+  <a class="brand" href="#top"><img src="icon.png" alt="">Limette</a>
   <span>Feito no Brasil. Conversor “zero clique” para Mac e Windows.</span>
   <div class="flinks"><a href="termos.html">Termos de uso</a><a href="privacidade.html">Privacidade</a></div>
 </div></footer>
@@ -491,11 +493,11 @@ async function loop(){
 }
 // tema: segue o sistema até a pessoa escolher
 const root = document.documentElement;
-try{ const t = localStorage.getItem("gomo-tema"); if(t) root.dataset.theme = t; }catch(e){}
+try{ const t = localStorage.getItem("limette-tema"); if(t) root.dataset.theme = t; }catch(e){}
 document.getElementById("theme").addEventListener("click", ()=>{
   const dark = root.dataset.theme!=="light";
   root.dataset.theme = dark ? "light" : "dark";
-  try{ localStorage.setItem("gomo-tema", root.dataset.theme); }catch(e){}
+  try{ localStorage.setItem("limette-tema", root.dataset.theme); }catch(e){}
 });
 
 if(reduce){ wheels[1].classList.add("show"); keys[1].classList.add("down"); file.classList.add("drag"); cursor.classList.add("drag"); file.style.opacity = 0; }
