@@ -193,7 +193,12 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .plat dt{color:var(--muted)}
 .plat dd{margin:0}
 .plat .btns{display:flex;flex-wrap:wrap;gap:10px}
-.btn.store svg{width:18px;height:18px;flex:none}
+/* selo oficial da Microsoft Store: o escuro no tema claro, o claro no tema escuro */
+.store-badge{display:inline-block;line-height:0;border-radius:8px}
+.store-badge img{width:200px;height:auto}
+.store-badge .on-dark{display:none}
+:root[data-theme="dark"] .store-badge .on-light{display:none}
+:root[data-theme="dark"] .store-badge .on-dark{display:inline}
 .plat .alt{font-size:.88rem;color:var(--muted)}
 .plat .trust{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--muted);background:var(--chip);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
 .plat .trust svg{width:20px;height:20px;flex:none;color:var(--accent-text);margin-top:1px}
@@ -450,9 +455,10 @@ footer .flinks a:hover{color:var(--ink)}
       <h3>Windows</h3>
       <dl><dt>Sistema</dt><dd>Windows 10 ou 11</dd><dt>Processador</dt><dd>Intel/AMD (x64) ou ARM</dd><dt>Teclas</dt><dd><kbd>Shift</kbd> <kbd>Ctrl</kbd> <kbd>Alt</kbd></dd><dt>Atualização</dt><dd>automática, pela loja</dd></dl>
       <div class="btns">
-        <a class="btn primary store" href="https://apps.microsoft.com/detail/9N0BQ4B2439C?hl=pt-br&amp;gl=BR" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="9.5" height="9.5" fill="#f25022"/><rect x="12.5" y="2" width="9.5" height="9.5" fill="#7fba00"/><rect x="2" y="12.5" width="9.5" height="9.5" fill="#00a4ef"/><rect x="12.5" y="12.5" width="9.5" height="9.5" fill="#ffb900"/></svg>
-          Baixar na Microsoft Store</a>
+        <a class="store-badge" href="https://get.microsoft.com/installer/download/9n0bq4b2439c?referrer=appbadge" target="_self" aria-label="Baixar na Microsoft Store">
+          <img class="on-light" src="https://get.microsoft.com/images/pt-br%20dark.svg" width="200" alt="Baixar na Microsoft Store">
+          <img class="on-dark" src="https://get.microsoft.com/images/pt-br%20light.svg" width="200" alt="Baixar na Microsoft Store">
+        </a>
       </div>
     </div>
   </div>
