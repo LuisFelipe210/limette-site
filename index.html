@@ -298,7 +298,7 @@ footer .flinks a:hover{color:var(--ink)}
     <div class="mode">
       <div class="key"><kbd>⌘</kbd><h3>Ferramentas</h3></div>
       <img src="img/roda-tools.png" alt="Roda Ferramentas com Editar, Tarjar, Sem fundo, Comprimir e outras" loading="lazy">
-      <p>Mexe no arquivo: editar, comprimir, tirar o fundo, tarjar dados, assinar PDF, cortar vídeo.</p>
+      <p>Mexe no arquivo: legendar vídeo, editar, comprimir, tirar o fundo, tarjar dados, assinar PDF.</p>
       <span class="win">Windows: Ctrl</span>
     </div>
     <div class="mode">
@@ -521,8 +521,8 @@ document.getElementById("track").innerHTML = [...F, ...F].map(f=>`<span>${f}</sp
 // "para onde vai"
 const P = {
   "JPG":   {c:"PNG HEIC WebP AVIF TIFF GIF BMP PDF PPTX", t:["Editar","Tarjar","Sem fundo","Comprimir","50%","Girar","Metadados","Texto","Tabela","Colagem"]},
-  "MP4":   {c:"MOV WebM MKV AVI WMV GIF MP3 M4A WAV", t:["Comprimir","Mudo","Cortar","Velocidade","Dividir","Enquadrar","Ocultar","Bipe","Quadros","Juntar"]},
-  "MP3":   {c:"M4A WAV FLAC OGG Opus AIFF WMA", t:["Comprimir","Normalizar","Cortar","Velocidade","Canais","Visualizar","Bipe","Juntar"]},
+  "MP4":   {c:"MOV WebM MKV AVI WMV GIF MP3 M4A WAV", t:["Legendar","Comprimir","Mudo","Cortar","Velocidade","Dividir","Enquadrar","Ocultar","Bipe","Quadros","Juntar"]},
+  "MP3":   {c:"M4A WAV FLAC OGG Opus AIFF WMA", t:["Legendar","Comprimir","Normalizar","Cortar","Velocidade","Canais","Visualizar","Bipe","Juntar"]},
   "PDF":   {c:"DOCX RTF TXT MD HTML EPUB PPTX XLSX PNG JPG", t:["Organizar","Tarjar","Assinar","Comprimir","Separar","Girar","Juntar","Metadados"]},
   "DOCX":  {c:"PDF RTF ODT HTML TXT MD EPUB", t:["Copiar texto","Contar palavras","Narrar","Metadados","Comprimir","Juntar"]},
   "XLSX":  {c:"ODS CSV TSV PDF HTML JSON", t:["Metadados","Comprimir"]},
