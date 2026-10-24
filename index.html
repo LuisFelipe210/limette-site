@@ -373,7 +373,7 @@ footer .flinks a:hover{color:var(--ink)}
     <div class="tabs" role="tablist" aria-label="Área"></div>
     <div class="body">
       <div class="list" id="tourList"></div>
-      <figure class="shot"><div class="bar"><i></i><i></i><i></i><span id="tourTitle"></span></div><img id="tourImg" src="img/telas/foto-ajustar.webp" width="1180" height="760" alt=""></figure>
+      <figure class="shot"><div class="bar"><i></i><i></i><i></i><span id="tourTitle"></span></div><img id="tourImg" src="img/telas/video-legendar.webp" width="1060" height="700" alt=""></figure>
     </div>
   </div>
 
@@ -548,6 +548,12 @@ draw();
 
 // galeria de telas
 const TOUR = {
+  "Vídeo": [
+    ["video-legendar", "Legendar", "Legenda automática estilo TikTok: escolha o estilo, a cor e a posição, e corrija o texto antes de gravar.", "Legendar — limoes.mp4"],
+    ["video-cortar", "Cortar", "Escolha o começo e o fim vendo o quadro de cada ponto.", "Cortar — limoes-video.mp4"],
+    ["video-enquadrar", "Enquadrar", "Recorte para 9:16, 1:1, 4:5 e outros, arrastando no quadro.", "Enquadrar — limoes-video.mp4"],
+    ["video-ocultar", "Ocultar áreas", "Desfoque, pixele ou tarje partes do vídeo, cada uma no seu trecho.", "Ocultar — limoes-video.mp4"],
+  ],
   "Fotos": [
     ["foto-ajustar", "Ajustar", "Estilos, luz, cor, nitidez e vinheta. O botão Original compara antes e depois.", "Editar — limoes.jpg"],
     ["foto-recortar", "Recortar", "Proporções prontas, girar, espelhar e o tamanho final em pixels.", "Editar — limoes.jpg"],
@@ -555,12 +561,6 @@ const TOUR = {
     ["foto-fundo", "Fundo", "Cor, degradê ou outra imagem, com margem, cantos e sombra.", "Editar — limoes.jpg"],
     ["colagem", "Colagem", "Grade, linha, coluna ou destaque, com espaço, cantos e fundo.", "Colagem — 4 imagens"],
     ["comprimir", "Comprimir", "Até 200 KB, 500 KB, 1 MB, 2 MB, ou o tamanho que você quiser.", "Comprimir"],
-  ],
-  "Vídeo": [
-    ["video-legendar", "Legendar", "Legenda automática estilo TikTok: escolha o estilo, a cor e a posição, e corrija o texto antes de gravar.", "Legendar — limoes.mp4"],
-    ["video-cortar", "Cortar", "Escolha o começo e o fim vendo o quadro de cada ponto.", "Cortar — limoes-video.mp4"],
-    ["video-enquadrar", "Enquadrar", "Recorte para 9:16, 1:1, 4:5 e outros, arrastando no quadro.", "Enquadrar — limoes-video.mp4"],
-    ["video-ocultar", "Ocultar áreas", "Desfoque, pixele ou tarje partes do vídeo, cada uma no seu trecho.", "Ocultar — limoes-video.mp4"],
   ],
   "Áudio": [
     ["audio-bipe", "Bipe de censura", "Marque os trechos na forma de onda e troque por bipe ou silêncio.", "Bipe — limoes-video.mp4"],
@@ -573,7 +573,7 @@ const TOUR = {
 (() => {
   const tabs = document.querySelector(".tour .tabs"), list = document.getElementById("tourList");
   const img = document.getElementById("tourImg"), title = document.getElementById("tourTitle");
-  let area = "Fotos", cur = 0;
+  let area = "Vídeo", cur = 0;
   function show() {
     const [file, name, , bar] = TOUR[area][cur];
     img.src = `img/telas/${file}.webp`; img.alt = `Tela ${name} do Limette`; title.textContent = bar;
