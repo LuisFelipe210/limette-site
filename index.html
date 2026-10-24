@@ -179,6 +179,9 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .plat dt{color:var(--muted)}
 .plat dd{margin:0}
 .plat .btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn.store svg{width:18px;height:18px;flex:none}
+.plat .alt{font-size:.88rem;color:var(--muted)}
+.plat .alt a{color:var(--ink);text-underline-offset:3px}
 .soon{font-family:var(--f-mono);font-size:.75rem;border:1px dashed var(--line);border-radius:999px;padding:4px 12px;color:var(--muted);justify-self:start}
 
 /* faq */
@@ -418,11 +421,13 @@ footer .flinks a:hover{color:var(--ink)}
     </div>
     <div class="plat">
       <h3>Windows</h3>
-      <dl><dt>Sistema</dt><dd>Windows 10 ou 11</dd><dt>Processador</dt><dd>Intel/AMD (x64) ou ARM</dd><dt>Teclas</dt><dd><kbd>Shift</kbd> <kbd>Ctrl</kbd> <kbd>Alt</kbd></dd><dt>Atualização</dt><dd>automática, uma vez por dia</dd></dl>
+      <dl><dt>Sistema</dt><dd>Windows 10 ou 11</dd><dt>Processador</dt><dd>Intel/AMD (x64) ou ARM</dd><dt>Teclas</dt><dd><kbd>Shift</kbd> <kbd>Ctrl</kbd> <kbd>Alt</kbd></dd><dt>Atualização</dt><dd>automática, pela loja ou uma vez por dia</dd></dl>
       <div class="btns">
-        <a class="btn primary" href="https://github.com/LuisFelipe210/limette-releases/releases/latest/download/Limette.exe">Baixar para Windows <small>x64</small></a>
-        <a class="btn" href="https://github.com/LuisFelipe210/limette-releases/releases/latest/download/Limette-ARM64.exe">ARM <small>ARM64</small></a>
+        <a class="btn primary store" href="https://apps.microsoft.com/detail/9N0BQ4B2439C?hl=pt-br&amp;gl=BR">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="9.5" height="9.5" fill="#f25022"/><rect x="12.5" y="2" width="9.5" height="9.5" fill="#7fba00"/><rect x="2" y="12.5" width="9.5" height="9.5" fill="#00a4ef"/><rect x="12.5" y="12.5" width="9.5" height="9.5" fill="#ffb900"/></svg>
+          Baixar na Microsoft Store</a>
       </div>
+      <p class="alt">Ou baixe o arquivo direto: <a href="https://github.com/LuisFelipe210/limette-releases/releases/latest/download/Limette.exe">Limette.exe</a> (Intel/AMD) · <a href="https://github.com/LuisFelipe210/limette-releases/releases/latest/download/Limette-ARM64.exe">ARM64</a>. Esse arquivo não tem assinatura, então o Windows mostra um aviso: clique em <b>Mais informações › Executar assim mesmo</b>.</p>
     </div>
   </div>
 </div></section>
