@@ -78,7 +78,7 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .stage{position:relative;aspect-ratio:1/1;max-width:100%;border-radius:28px;background:
   radial-gradient(circle at 50% 45%, var(--glow) 0%, var(--surface) 55%, var(--bg) 100%);border:1px solid var(--line);overflow:hidden}
 .stage .dots{position:absolute;inset:0;background-image:radial-gradient(var(--line) 1px, transparent 1px);background-size:22px 22px;opacity:.6}
-.wheel{position:absolute;left:50%;top:48%;width:78%;transform:translate(-50%,-50%) scale(.6);opacity:0;transition:transform .45s cubic-bezier(.2,.9,.25,1.15), opacity .3s;filter:drop-shadow(0 30px 60px var(--shadow))}
+.wheel{position:absolute;left:50%;top:48%;width:78%;transform:translate(-50%,-50%) scale(.6);opacity:0;transition:transform .45s cubic-bezier(.2,.9,.25,1.15), opacity .3s}
 .wheel.show{transform:translate(-50%,-50%) scale(1);opacity:1}
 .file{position:absolute;left:12%;top:74%;width:64px;transition:left .9s cubic-bezier(.5,0,.2,1), top .9s cubic-bezier(.5,0,.2,1), opacity .3s;z-index:3}
 .file .doc{width:64px;height:80px;border-radius:8px;background:#f4efe3;position:relative;box-shadow:0 10px 30px var(--shadow);border:1px solid #d8d0bd;display:grid;place-items:end center;padding-bottom:8px}
@@ -111,6 +111,11 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 @media (max-width:900px){.trio{grid-template-columns:1fr}}
 .mode{border-radius:24px;padding:24px;display:grid;gap:14px;align-content:start}
 .mode img{width:100%;max-width:340px;margin:0 auto;display:block}
+/* a roda é de vidro (Liquid Glass): a foto vem sem o fundo do disco, e o vidro é feito aqui, no tamanho do disco
+   (87,8% da imagem): tom escuro translúcido, desfoque do que está atrás e uma borda clara fina */
+.glass{border-radius:50%;clip-path:circle(43.9% at 50% 50%);
+  background:radial-gradient(circle at 50% 50%, rgba(28,28,30,.50) 0, rgba(18,18,20,.58) 42.6%, rgba(255,255,255,.28) 43.4%, rgba(255,255,255,.10) 43.9%, transparent 43.9%);
+  -webkit-backdrop-filter:blur(22px) saturate(1.7);backdrop-filter:blur(22px) saturate(1.7)}
 .mode .key{display:flex;align-items:center;gap:12px}
 .mode .key kbd{font-size:1.3rem;padding:6px 14px}
 .mode p{color:var(--muted)}
@@ -270,9 +275,9 @@ footer .flinks a:hover{color:var(--ink)}
   <div class="stage" id="stage" aria-label="Demonstração: um arquivo é arrastado, uma tecla é apertada e a roda do Limette aparece">
     <div class="dots"></div>
     <div class="caption" id="cap">foto.jpg</div>
-    <img class="wheel" data-w="0" src="img/roda-convert.png" alt="Roda Converter do Limette">
-    <img class="wheel" data-w="1" src="img/roda-tools.png" alt="Roda Ferramentas do Limette">
-    <img class="wheel" data-w="2" src="img/roda-actions.png" alt="Roda Ações do Limette">
+    <img class="wheel glass" data-w="0" src="img/roda-convert-vidro.png" alt="Roda Converter do Limette">
+    <img class="wheel glass" data-w="1" src="img/roda-tools-vidro.png" alt="Roda Ferramentas do Limette">
+    <img class="wheel glass" data-w="2" src="img/roda-actions-vidro.png" alt="Roda Ações do Limette">
     <div class="file" id="file"><div class="doc"><b>JPG</b></div><div class="name">foto.jpg</div></div>
     <svg class="cursor" id="cursor" viewBox="0 0 22 30" aria-hidden="true"><path d="M2 2 L2 24 L8 18 L12 28 L16 26 L12 17 L20 17 Z" fill="#fff" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/></svg>
     <div class="keys"><kbd data-k="0">⇧</kbd><kbd data-k="1">⌘</kbd><kbd data-k="2">⌃</kbd></div>
@@ -291,19 +296,19 @@ footer .flinks a:hover{color:var(--ink)}
   <div class="trio">
     <div class="mode">
       <div class="key"><kbd>⇧</kbd><h3>Converter</h3></div>
-      <img src="img/roda-convert.png" alt="Roda Converter com PNG, HEIC, WebP, AVIF e outros" loading="lazy">
+      <img class="glass" src="img/roda-convert-vidro.png" alt="Roda Converter com PNG, HEIC, WebP, AVIF e outros" loading="lazy">
       <p>Troca o formato: foto para PNG ou HEIC, vídeo para MP4 ou GIF, PDF para Word, planta DWG para PDF.</p>
       <span class="win">Windows: Shift</span>
     </div>
     <div class="mode">
       <div class="key"><kbd>⌘</kbd><h3>Ferramentas</h3></div>
-      <img src="img/roda-tools.png" alt="Roda Ferramentas com Editar, Tarjar, Sem fundo, Comprimir e outras" loading="lazy">
+      <img class="glass" src="img/roda-tools-vidro.png" alt="Roda Ferramentas com Editar, Tarjar, Sem fundo, Comprimir e outras" loading="lazy">
       <p>Mexe no arquivo: legendar vídeo, editar, comprimir, tirar o fundo, tarjar dados, assinar PDF.</p>
       <span class="win">Windows: Ctrl</span>
     </div>
     <div class="mode">
       <div class="key"><kbd>⌃</kbd><h3>Ações</h3></div>
-      <img src="img/roda-actions.png" alt="Roda Ações com AirDrop, Flutuar, Copiar, Mover e outras" loading="lazy">
+      <img class="glass" src="img/roda-actions-vidro.png" alt="Roda Ações com AirDrop, Flutuar, Copiar, Mover e outras" loading="lazy">
       <p>Leva o arquivo para algum lugar: AirDrop, prateleira flutuante, outra pasta, Terminal, hash.</p>
       <span class="win">Windows: Alt</span>
     </div>
