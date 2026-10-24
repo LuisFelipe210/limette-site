@@ -75,27 +75,18 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .note{font-size:.88rem;color:var(--muted)}
 @media (max-width:900px){.hero{grid-template-columns:1fr}}
 
-.stage{position:relative;aspect-ratio:1/1;max-width:100%;border-radius:28px;background:
-  radial-gradient(circle at 50% 45%, var(--glow) 0%, var(--surface) 55%, var(--bg) 100%);border:1px solid var(--line);overflow:hidden}
-.stage .dots{position:absolute;inset:0;background-image:radial-gradient(var(--line) 1px, transparent 1px);background-size:22px 22px;opacity:.6}
-.wheel{position:absolute;left:50%;top:48%;width:78%;transform:translate(-50%,-50%) scale(.6);opacity:0;transition:transform .45s cubic-bezier(.2,.9,.25,1.15), opacity .3s}
-.wheel.show{transform:translate(-50%,-50%) scale(1);opacity:1}
-.file{position:absolute;left:12%;top:74%;width:64px;transition:left .9s cubic-bezier(.5,0,.2,1), top .9s cubic-bezier(.5,0,.2,1), opacity .3s;z-index:3}
-.file .doc{width:64px;height:80px;border-radius:8px;background:#f4efe3;position:relative;box-shadow:0 10px 30px var(--shadow);border:1px solid #d8d0bd;display:grid;place-items:end center;padding-bottom:8px}
-.file .doc::before{content:"";position:absolute;top:0;right:0;width:18px;height:18px;background:linear-gradient(225deg, var(--glow) 50%, #d8d0bd 50%);border-bottom-left-radius:4px}
-.file .doc b{font-family:var(--f-mono);font-size:.7rem;background:#3a7bd5;color:#fff;border-radius:4px;padding:1px 5px}
-.file .name{font-size:.75rem;text-align:center;margin-top:6px;color:var(--muted);white-space:nowrap}
-.file.drag{left:calc(50% - 32px);top:calc(48% - 40px)}
-.file.drag .doc{transform:rotate(-6deg)}
-.cursor{position:absolute;width:22px;left:calc(12% + 40px);top:calc(74% + 40px);transition:left .9s cubic-bezier(.5,0,.2,1), top .9s cubic-bezier(.5,0,.2,1);z-index:4}
-.cursor.drag{left:calc(50% + 6px);top:calc(48% + 4px)}
-.keys{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:10px;z-index:5}
+.stage{position:relative;aspect-ratio:1/1;max-width:100%;border-radius:28px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 60px -30px var(--shadow)}
+.stage .backdrop,.wheel{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* fotos da roda de verdade (Liquid Glass) sobre o mesmo fundo: só a roda "aparece" */
+.wheel{opacity:0;transform:scale(1.015);transition:opacity .35s ease, transform .45s cubic-bezier(.2,.9,.25,1.15)}
+.wheel.show{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.wheel{transition:none}}
+.keys{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:10px;z-index:5}
 .keys kbd{font-size:1.1rem;padding:8px 14px;border-radius:10px;transition:background .15s, color .15s, transform .15s;min-width:52px;text-align:center}
 .keys kbd.down{background:var(--lemon);color:var(--lemon-ink);border-color:var(--lemon);transform:translateY(2px)}
 .toast{position:absolute;left:50%;top:20px;transform:translate(-50%,-12px);opacity:0;background:var(--raise);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.9rem;transition:opacity .3s, transform .3s;white-space:nowrap;z-index:6}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .toast i{font-style:normal;color:var(--accent-text)}
-.caption{position:absolute;left:20px;top:20px;font-family:var(--f-mono);font-size:.75rem;color:var(--muted);z-index:6}
 @media (prefers-reduced-motion:reduce){.wheel,.file,.cursor,.toast{transition:none}}
 
 /* formats marquee */
@@ -111,11 +102,8 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 @media (max-width:900px){.trio{grid-template-columns:1fr}}
 .mode{border-radius:24px;padding:24px;display:grid;gap:14px;align-content:start}
 .mode img{width:100%;max-width:340px;margin:0 auto;display:block}
-/* a roda é de vidro (Liquid Glass): a foto vem sem o fundo do disco, e o vidro é feito aqui, no tamanho do disco
-   (87,8% da imagem): tom escuro translúcido, desfoque do que está atrás e uma borda clara fina */
-.glass{border-radius:50%;clip-path:circle(43.9% at 50% 50%);
-  background:radial-gradient(circle closest-side at 50% 50%, rgba(30,30,32,.52) 0, rgba(18,18,20,.62) 86%, rgba(255,255,255,.30) 87%, rgba(255,255,255,.12) 87.8%, transparent 87.8%);
-  -webkit-backdrop-filter:blur(22px) saturate(1.7);backdrop-filter:blur(22px) saturate(1.7)}
+.mode img.shot-wheel{border-radius:18px;aspect-ratio:1/1;object-fit:cover}
+
 .mode .key{display:flex;align-items:center;gap:12px}
 .mode .key kbd{font-size:1.3rem;padding:6px 14px}
 .mode p{color:var(--muted)}
@@ -272,14 +260,11 @@ footer .flinks a:hover{color:var(--ink)}
     <p class="note">Tudo acontece no seu computador. Nenhum arquivo vai para a internet.</p>
   </div>
 
-  <div class="stage" id="stage" aria-label="Demonstração: um arquivo é arrastado, uma tecla é apertada e a roda do Limette aparece">
-    <div class="dots"></div>
-    <div class="caption" id="cap">foto.jpg</div>
-    <img class="wheel glass" data-w="0" src="img/roda-convert-vidro.png" alt="Roda Converter do Limette">
-    <img class="wheel glass" data-w="1" src="img/roda-tools-vidro.png" alt="Roda Ferramentas do Limette">
-    <img class="wheel glass" data-w="2" src="img/roda-actions-vidro.png" alt="Roda Ações do Limette">
-    <div class="file" id="file"><div class="doc"><b>JPG</b></div><div class="name">foto.jpg</div></div>
-    <svg class="cursor" id="cursor" viewBox="0 0 22 30" aria-hidden="true"><path d="M2 2 L2 24 L8 18 L12 28 L16 26 L12 17 L20 17 Z" fill="#fff" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/></svg>
+  <div class="stage" id="stage" aria-label="Demonstração: uma tecla é apertada e a roda do Limette aparece em volta do cursor">
+    <img class="backdrop" src="img/roda-fundo.webp" alt="">
+    <img class="wheel" data-w="0" src="img/roda-convert-real.webp" alt="Roda Converter do Limette">
+    <img class="wheel" data-w="1" src="img/roda-tools-real.webp" alt="Roda Ferramentas do Limette">
+    <img class="wheel" data-w="2" src="img/roda-actions-real.webp" alt="Roda Ações do Limette">
     <div class="keys"><kbd data-k="0">⇧</kbd><kbd data-k="1">⌘</kbd><kbd data-k="2">⌃</kbd></div>
     <div class="toast" id="toast"></div>
   </div>
@@ -296,19 +281,19 @@ footer .flinks a:hover{color:var(--ink)}
   <div class="trio">
     <div class="mode">
       <div class="key"><kbd>⇧</kbd><h3>Converter</h3></div>
-      <img class="glass" src="img/roda-convert-vidro.png" alt="Roda Converter com PNG, HEIC, WebP, AVIF e outros" loading="lazy">
+      <img class="shot-wheel" src="img/roda-convert-real.webp" alt="Roda Converter com PNG, HEIC, WebP, AVIF e outros" loading="lazy">
       <p>Troca o formato: foto para PNG ou HEIC, vídeo para MP4 ou GIF, PDF para Word, planta DWG para PDF.</p>
       <span class="win">Windows: Shift</span>
     </div>
     <div class="mode">
       <div class="key"><kbd>⌘</kbd><h3>Ferramentas</h3></div>
-      <img class="glass" src="img/roda-tools-vidro.png" alt="Roda Ferramentas com Editar, Tarjar, Sem fundo, Comprimir e outras" loading="lazy">
+      <img class="shot-wheel" src="img/roda-tools-real.webp" alt="Roda Ferramentas com Editar, Tarjar, Sem fundo, Comprimir e outras" loading="lazy">
       <p>Mexe no arquivo: legendar vídeo, editar, comprimir, tirar o fundo, tarjar dados, assinar PDF.</p>
       <span class="win">Windows: Ctrl</span>
     </div>
     <div class="mode">
       <div class="key"><kbd>⌃</kbd><h3>Ações</h3></div>
-      <img class="glass" src="img/roda-actions-vidro.png" alt="Roda Ações com AirDrop, Flutuar, Copiar, Mover e outras" loading="lazy">
+      <img class="shot-wheel" src="img/roda-actions-real.webp" alt="Roda Ações com AirDrop, Flutuar, Copiar, Mover e outras" loading="lazy">
       <p>Leva o arquivo para algum lugar: AirDrop, prateleira flutuante, outra pasta, Terminal, hash.</p>
       <span class="win">Windows: Alt</span>
     </div>
@@ -596,32 +581,29 @@ const TOUR = {
   draw();
 })();
 
-// demonstração do herói
+// demonstração do herói: aperta a tecla, a roda (foto real) aparece, e o aviso do resultado
 const steps = [
-  {k:0, toast:"Pronto: <i>foto.png</i> ao lado do original"},
-  {k:1, toast:"Pronto: <i>foto (sem fundo).png</i>"},
-  {k:2, toast:"Na prateleira flutuante"},
+  {k:0, toast:"Pronto: <i>limoes.webp</i> ao lado do original"},
+  {k:1, toast:"Pronto: CPF, e-mail e cartão <i>tarjados</i>"},
+  {k:2, toast:"Na <i>prateleira flutuante</i>"},
 ];
-const file = document.getElementById("file"), cursor = document.getElementById("cursor"), toast = document.getElementById("toast");
+const toast = document.getElementById("toast");
 const wheels = [...document.querySelectorAll(".wheel")], keys = [...document.querySelectorAll(".keys kbd")];
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const wait = ms => new Promise(r=>setTimeout(r, ms));
 async function loop(){
   for(let i=0;;i=(i+1)%steps.length){
     const s = steps[i];
-    file.classList.add("drag"); cursor.classList.add("drag"); file.style.opacity = 1;
-    await wait(1000);
+    await wait(700);
     keys[s.k].classList.add("down");
     await wait(250);
     wheels[s.k].classList.add("show");
-    await wait(1900);
+    await wait(2300);
     keys[s.k].classList.remove("down");
-    wheels[s.k].classList.remove("show"); file.style.opacity = 0;
+    wheels[s.k].classList.remove("show");
     toast.innerHTML = s.toast; toast.classList.add("show");
     await wait(1500);
     toast.classList.remove("show");
-    file.classList.remove("drag"); cursor.classList.remove("drag");
-    await wait(900);
   }
 }
 // tema: segue o sistema até a pessoa escolher
@@ -633,7 +615,7 @@ document.getElementById("theme").addEventListener("click", ()=>{
   try{ localStorage.setItem("limette-tema", root.dataset.theme); }catch(e){}
 });
 
-if(reduce){ wheels[1].classList.add("show"); keys[1].classList.add("down"); file.classList.add("drag"); cursor.classList.add("drag"); file.style.opacity = 0; }
+if(reduce){ wheels[1].classList.add("show"); keys[1].classList.add("down"); }
 else loop();
 </script>
 </body>
