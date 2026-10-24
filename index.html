@@ -182,7 +182,6 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 .btn.store svg{width:18px;height:18px;flex:none}
 .plat .alt{font-size:.88rem;color:var(--muted)}
 .plat .alt a{color:var(--ink);text-underline-offset:3px}
-.soon{font-family:var(--f-mono);font-size:.75rem;border:1px dashed var(--line);border-radius:999px;padding:4px 12px;color:var(--muted);justify-self:start}
 
 /* faq */
 .faqgrid{margin-top:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);gap:56px;align-items:start}
@@ -416,18 +415,19 @@ footer .flinks a:hover{color:var(--ink)}
     <div class="plat">
       <h3>Mac</h3>
       <dl><dt>Sistema</dt><dd>macOS 13 ou mais novo</dd><dt>Processador</dt><dd>Apple silicon (M1 em diante)</dd><dt>Teclas</dt><dd><kbd>⇧</kbd> <kbd>⌘</kbd> <kbd>⌃</kbd></dd><dt>Só no Mac</dt><dd>AirDrop, sem fundo, OCR, narrar, SketchUp</dd></dl>
-      <!-- Ainda não há download público da versão Mac -->
-      <span class="soon">Em breve</span>
+      <div class="btns">
+        <a class="btn primary" href="https://github.com/LuisFelipe210/limette-releases/releases/latest/download/Limette-Mac.zip">Baixar para Mac <small>.zip</small></a>
+      </div>
+      <p class="alt">Abra o zip e arraste o Limette para Aplicativos. Na primeira vez, o macOS avisa que não consegue verificar o app: abra <b>Ajustes do Sistema › Privacidade e Segurança</b> e clique em <b>Abrir Mesmo Assim</b>.</p>
     </div>
     <div class="plat">
       <h3>Windows</h3>
-      <dl><dt>Sistema</dt><dd>Windows 10 ou 11</dd><dt>Processador</dt><dd>Intel/AMD (x64) ou ARM</dd><dt>Teclas</dt><dd><kbd>Shift</kbd> <kbd>Ctrl</kbd> <kbd>Alt</kbd></dd><dt>Atualização</dt><dd>automática, pela loja ou uma vez por dia</dd></dl>
+      <dl><dt>Sistema</dt><dd>Windows 10 ou 11</dd><dt>Processador</dt><dd>Intel/AMD (x64) ou ARM</dd><dt>Teclas</dt><dd><kbd>Shift</kbd> <kbd>Ctrl</kbd> <kbd>Alt</kbd></dd><dt>Atualização</dt><dd>automática, pela loja</dd></dl>
       <div class="btns">
         <a class="btn primary store" href="https://apps.microsoft.com/detail/9N0BQ4B2439C?hl=pt-br&amp;gl=BR" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="9.5" height="9.5" fill="#f25022"/><rect x="12.5" y="2" width="9.5" height="9.5" fill="#7fba00"/><rect x="2" y="12.5" width="9.5" height="9.5" fill="#00a4ef"/><rect x="12.5" y="12.5" width="9.5" height="9.5" fill="#ffb900"/></svg>
           Baixar na Microsoft Store</a>
       </div>
-      <p class="alt">Ou baixe o arquivo direto: <a href="https://github.com/LuisFelipe210/limette-releases/releases/latest/download/Limette.exe">Limette.exe</a> (Intel/AMD) · <a href="https://github.com/LuisFelipe210/limette-releases/releases/latest/download/Limette-ARM64.exe">ARM64</a>. Esse arquivo não tem assinatura, então o Windows mostra um aviso: clique em <b>Mais informações › Executar assim mesmo</b>.</p>
     </div>
   </div>
 </div></section>
