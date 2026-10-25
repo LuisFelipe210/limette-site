@@ -349,8 +349,9 @@ footer .flinks a:hover{color:var(--ink)}
       <li>Narrar o documento em áudio</li></ul></div>
     <div class="card wide"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></div><span class="tag">Engenharia</span><h3>Planta DWG sem AutoCAD</h3><ul>
       <li>DWG e DXF para PDF vetorial, SVG, PNG, JPG e TIFF</li>
+      <li>PDF na escala, uma página por prancha (A0 a A4)</li>
       <li>Cotas, hachuras, blocos, textos e tracejados</li>
-      <li>Trocar a versão do DWG e salvar para SketchUp</li>
+      <li>DXF para DWG e outra versão do DWG, com o ODA File Converter</li>
       <li>STEP e IGES para STL, com prévia em imagem</li></ul></div>
     <div class="card wide"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 4l-4 16"/></svg></div><span class="tag">Para quem programa</span><h3>Os utilitários de todo dia</h3><ul>
       <li>SVG para React ou SwiftUI, e PNG em @1x, @2x e @3x</li>
@@ -416,8 +417,8 @@ footer .flinks a:hover{color:var(--ink)}
     <div class="txt">
       <div class="eyebrow">Engenharia · DWG e DXF</div>
       <h2>Mande a planta para quem não tem AutoCAD.</h2>
-      <p>Arraste o DWG, aperte <kbd>⇧</kbd> e solte em PDF. O Limette desenha linhas, arcos, cotas, hachuras, blocos e textos com traço fino de 0,05 mm, pronto para imprimir ou mandar pelo WhatsApp.</p>
-      <p>Também converte DXF para DWG, troca a versão do DWG e gera o modelo do SketchUp.</p>
+      <p>Arraste o DWG, aperte <kbd>⇧</kbd> e solte em PDF. Cada prancha desenhada no modelo vira uma página no tamanho do papel, de A0 a A4, e na escala dela; legendas e quadros de carga soltos saem em páginas à parte, na mesma escala. O Limette desenha linhas, arcos, cotas, hachuras, blocos e textos com traço fino de 0,05 mm, pronto para imprimir ou mandar pelo WhatsApp.</p>
+      <p>Também transforma DXF em DWG e troca a versão do DWG, do AutoCAD 2018 ao R12, usando o ODA File Converter, um programa grátis que você instala uma vez.</p>
     </div>
   </div>
 </div></section>
@@ -442,7 +443,7 @@ footer .flinks a:hover{color:var(--ink)}
   <div class="plats">
     <div class="plat">
       <h3>Mac</h3>
-      <dl><dt>Sistema</dt><dd>macOS 13 ou mais novo</dd><dt>Processador</dt><dd>Apple silicon (M1 em diante)</dd><dt>Teclas</dt><dd><kbd>⇧</kbd> <kbd>⌘</kbd> <kbd>⌃</kbd></dd><dt>Só no Mac</dt><dd>AirDrop, sem fundo, OCR, narrar, SketchUp</dd></dl>
+      <dl><dt>Sistema</dt><dd>macOS 13 ou mais novo</dd><dt>Processador</dt><dd>Apple silicon (M1 em diante)</dd><dt>Teclas</dt><dd><kbd>⇧</kbd> <kbd>⌘</kbd> <kbd>⌃</kbd></dd><dt>Só no Mac</dt><dd>AirDrop, sem fundo, OCR, narrar</dd></dl>
       <div class="btns">
         <a class="btn primary" href="https://github.com/LuisFelipe210/limette-releases/releases/latest/download/Limette-Mac.zip">Baixar para Mac <small>.zip</small></a>
       </div>
@@ -470,7 +471,7 @@ footer .flinks a:hover{color:var(--ink)}
     <details><summary>Como funciona a legenda automática?</summary><p>Arraste um vídeo, aperte ⌘ (Ctrl no Windows) e solte em Legendar. O Limette ouve a fala no próprio computador, com o whisper, e abre uma janela para escolher o estilo (Destaque, Caixa, Uma palavra, Clássico ou os animados Pop, Pulo e Digitando), a cor, a posição e o tamanho, e corrigir alguma palavra. Cada frase tem um ▶ para ouvir o trecho antes de corrigir. Sai o vídeo legendado e o arquivo .srt. Na primeira vez, você escolhe o modelo de voz: Rápido (148 MB) ou Melhor (574 MB).</p></details>
     <details><summary>Funciona arrastando de qualquer lugar?</summary><p>Sim: do Finder ou Explorador, da mesa, do navegador, do e-mail. Basta começar a arrastar e apertar a tecla antes de soltar. A roda também aceita as teclas 1 a 9, as setas, Enter e Esc.</p></details>
     <details><summary>Onde fica o arquivo novo?</summary><p>Ao lado do original, com outro nome. Se a pasta não deixar gravar, ele vai para Downloads. O original nunca é alterado.</p></details>
-    <details><summary>Preciso instalar mais alguma coisa?</summary><p>Para vídeo e áudio o Limette usa o ffmpeg; no Windows ele mesmo instala quando precisa. Para DWG e STEP existe um gerenciador de extras que baixa o que falta com uma barra de progresso.</p></details>
+    <details><summary>Preciso instalar mais alguma coisa?</summary><p>Para vídeo e áudio o Limette usa o ffmpeg; no Windows ele mesmo instala quando precisa. Para abrir DWG e STEP, o gerenciador de extras baixa o que falta com uma barra de progresso. Para gravar DWG (de um DXF ou em outra versão), instale o ODA File Converter, grátis no site da Open Design Alliance; se ele faltar, o Limette abre a página de download.</p></details>
     <details><summary>Dá para trocar as teclas?</summary><p>Dá. No menu do ícone você escolhe qual tecla abre cada roda.</p></details>
     <details><summary>Abre PPTX e planilhas sem o Office?</summary><p>Sim. O Limette lê e desenha PPTX, XLSX, DOCX e ODS sozinho. Só o PPT antigo e o Keynote precisam do app instalado.</p></details>
     <p class="faq-mail">Não achou a sua pergunta? Escreva para <a href="mailto:contato.limette@gmail.com">contato.limette@gmail.com</a>.</p>
@@ -509,7 +510,7 @@ footer .flinks a:hover{color:var(--ink)}
 
 <script>
 // formatos na faixa
-const F = "JPG PNG HEIC WebP AVIF TIFF GIF BMP SVG MP4 MOV MKV WebM AVI WMV MP3 M4A WAV FLAC OGG Opus AIFF WMA PDF DOCX ODT RTF EPUB Markdown HTML TXT PAGES PPTX XLSX ODS CSV TSV JSON SRT VTT ZIP RAR 7z TAR GZIP DWG DXF STEP IGES STL OBJ SKP TTF OTF WOFF WOFF2".split(" ");
+const F = "JPG PNG HEIC WebP AVIF TIFF GIF BMP SVG MP4 MOV MKV WebM AVI WMV MP3 M4A WAV FLAC OGG Opus AIFF WMA PDF DOCX ODT RTF EPUB Markdown HTML TXT PAGES PPTX XLSX ODS CSV TSV JSON SRT VTT ZIP RAR 7z TAR GZIP DWG DXF STEP IGES STL OBJ TTF OTF WOFF WOFF2".split(" ");
 document.getElementById("track").innerHTML = [...F, ...F].map(f=>`<span>${f}</span>`).join("");
 
 // "para onde vai"
@@ -521,7 +522,7 @@ const P = {
   "DOCX":  {c:"PDF RTF ODT HTML TXT MD EPUB", t:["Copiar texto","Contar palavras","Narrar","Metadados","Comprimir","Juntar"]},
   "XLSX":  {c:"ODS CSV TSV PDF HTML JSON", t:["Metadados","Comprimir"]},
   "PPTX":  {c:"PDF PNG JPG TXT", t:["Metadados","Comprimir"]},
-  "DWG":   {c:"DXF DWG SKP SVG PNG JPG TIFF PDF", t:[]},
+  "DWG":   {c:"DXF DWG SVG PNG JPG TIFF PDF", t:[]},
   "SVG":   {c:"PNG @2x/@3x React/SwiftUI JPG WebP PDF", t:["Editar","Otimizar","Comprimir"]},
   "STEP":  {c:"STL Prévia", t:[]},
   "TTF":   {c:"WOFF2 WOFF", t:[]},
