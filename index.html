@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-/* Layout: casca escura do ícone, gomos do amarelo ao verde-claro como único acento; a roda real do app é o herói */
+/* Layout: casca escura do ícone, gomos do amarelo ao verde-claro como único acento; o topo é um pôster amarelo com a roda do app */
 /* claro é o padrão; o escuro só entra pelo botão (data-theme="dark") */
 :root{
   --bg:#f8faee; --surface:#ffffff; --raise:#eef2e0; --ink:#1b1e14; --muted:#5f6652; --line:#dfe5cc;
@@ -66,28 +66,17 @@ nav .btn{padding:8px 16px;font-size:.9rem}
 :root[data-theme="dark"] .theme .sun{display:block} :root[data-theme="dark"] .theme .moon{display:none}
 @media (max-width:760px){nav .links{display:none} .theme{margin-left:auto}}
 
-/* hero */
-.hero{padding-block:72px 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
-.hero .copy{display:grid;gap:24px}
-.hero h1 span{color:var(--h1-accent);background:linear-gradient(90deg,#f6d32d,#b3ed6b) 0 82%/100% 34% no-repeat;padding-inline:.04em}
-:root[data-theme="dark"] .hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-inline:0}
-.ctas{display:flex;flex-wrap:wrap;gap:12px}
-.note{font-size:.88rem;color:var(--muted)}
-@media (max-width:900px){.hero{grid-template-columns:1fr}}
-
-.stage{position:relative;aspect-ratio:1/1;max-width:100%;border-radius:28px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 60px -30px var(--shadow)}
-.stage .backdrop,.wheel{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-/* fotos da roda de verdade (Liquid Glass) sobre o mesmo fundo: só a roda "aparece" */
-.wheel{opacity:0;transform:scale(1.015);transition:opacity .35s ease, transform .45s cubic-bezier(.2,.9,.25,1.15)}
-.wheel.show{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.wheel{transition:none}}
-.keys{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:10px;z-index:5}
-.keys kbd{font-size:1.1rem;padding:8px 14px;border-radius:10px;transition:background .15s, color .15s, transform .15s;min-width:52px;text-align:center}
-.keys kbd.down{background:var(--lemon);color:var(--lemon-ink);border-color:var(--lemon);transform:translateY(2px)}
-.toast{position:absolute;left:50%;top:20px;transform:translate(-50%,-12px);opacity:0;background:var(--raise);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.9rem;transition:opacity .3s, transform .3s;white-space:nowrap;z-index:6}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.toast i{font-style:normal;color:var(--accent-text)}
-@media (prefers-reduced-motion:reduce){.wheel,.file,.cursor,.toast{transition:none}}
+/* hero: pôster cítrico, o nome grande e a roda de verdade sobre o amarelo do limão */
+.hero{background:#f6d32d;color:#231d00;position:relative;overflow:hidden;padding-block:56px 0;min-height:min(78vh,720px)}
+.hero .wrap{position:relative;min-height:inherit;display:grid;align-content:space-between}
+.hero h1{font-size:clamp(5rem,19vw,17rem);letter-spacing:-.055em;line-height:.85;margin-left:-.04em}
+.hero .bigwheel{position:absolute;right:-60px;top:22%;width:min(56vw,640px);height:auto;filter:drop-shadow(0 30px 40px #3a2f0a55)}
+.hero .foot{display:grid;gap:22px;max-width:40ch;padding-block:40px 64px;position:relative}
+.hero .foot p{font-size:1.15rem;line-height:1.5}
+.hero kbd{background:#fffbe6;border-color:#c9a91a;color:#231d00}
+.hero .btn{background:#231d00;color:#f6d32d;border-color:#231d00;justify-self:start;border-radius:10px}
+.hero .btn:hover{background:#231d00;filter:brightness(1.4)}
+@media (max-width:760px){.hero .bigwheel{position:relative;right:auto;top:auto;width:120%;margin:10px -10% 0;justify-self:center}.hero .foot{padding-top:8px}}
 
 /* formats marquee */
 .marquee{margin-top:96px;border-block:1px solid var(--line);overflow:hidden;padding-block:18px;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
@@ -253,25 +242,12 @@ footer .flinks a:hover{color:var(--ink)}
 </div></nav>
 
 <main id="top">
-<div class="g"><div class="wrap hero">
-  <div class="copy">
-    <div class="eyebrow">Para Mac e Windows</div>
-    <h1>Arraste.<br>Aperte.<br><span>Pronto.</span></h1>
-    <p class="lede">Comece a arrastar um arquivo, aperte uma tecla e uma roda aparece em volta do cursor. Solte numa fatia e o arquivo sai convertido, comprimido, tarjado ou assinado, sem abrir nenhum programa.</p>
-    <div class="ctas">
-      <a class="btn primary" href="#baixar">Baixar o Limette</a>
-      <a class="btn" href="#como">Ver como funciona</a>
-    </div>
-    <p class="note">Tudo acontece no seu computador. Nenhum arquivo vai para a internet.</p>
-  </div>
-
-  <div class="stage" id="stage" aria-label="Demonstração: uma tecla é apertada e a roda do Limette aparece em volta do cursor">
-    <img class="backdrop" src="img/roda-fundo.webp" alt="">
-    <img class="wheel" data-w="0" src="img/roda-convert-real.webp" alt="Roda Converter do Limette">
-    <img class="wheel" data-w="1" src="img/roda-tools-real.webp" alt="Roda Ferramentas do Limette">
-    <img class="wheel" data-w="2" src="img/roda-actions-real.webp" alt="Roda Ações do Limette">
-    <div class="keys"><kbd data-k="0">⇧</kbd><kbd data-k="1">⌘</kbd><kbd data-k="2">⌃</kbd></div>
-    <div class="toast" id="toast"></div>
+<div class="hero g"><div class="wrap">
+  <h1>Limette</h1>
+  <img class="bigwheel" src="img/roda-convert.png" width="784" height="784" alt="A roda Converter do Limette, com PNG, HEIC, WebP e outros formatos">
+  <div class="foot">
+    <p>Arraste um arquivo, aperte <kbd>⇧</kbd> e a roda aparece no cursor. Converter, comprimir, tarjar e assinar, no Mac e no Windows, sem mandar nada para a internet.</p>
+    <a class="btn" href="#baixar">Baixar o Limette</a>
   </div>
 </div></div>
 
@@ -587,31 +563,6 @@ const TOUR = {
   draw();
 })();
 
-// demonstração do herói: aperta a tecla, a roda (foto real) aparece, e o aviso do resultado
-const steps = [
-  {k:0, toast:"Pronto: <i>limoes.webp</i> ao lado do original"},
-  {k:1, toast:"Pronto: CPF, e-mail e cartão <i>tarjados</i>"},
-  {k:2, toast:"Na <i>prateleira flutuante</i>"},
-];
-const toast = document.getElementById("toast");
-const wheels = [...document.querySelectorAll(".wheel")], keys = [...document.querySelectorAll(".keys kbd")];
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const wait = ms => new Promise(r=>setTimeout(r, ms));
-async function loop(){
-  for(let i=0;;i=(i+1)%steps.length){
-    const s = steps[i];
-    await wait(700);
-    keys[s.k].classList.add("down");
-    await wait(250);
-    wheels[s.k].classList.add("show");
-    await wait(2300);
-    keys[s.k].classList.remove("down");
-    wheels[s.k].classList.remove("show");
-    toast.innerHTML = s.toast; toast.classList.add("show");
-    await wait(1500);
-    toast.classList.remove("show");
-  }
-}
 // tema: segue o sistema até a pessoa escolher
 const root = document.documentElement;
 try{ const t = localStorage.getItem("limette-tema"); if(t) root.dataset.theme = t; }catch(e){}
@@ -620,9 +571,6 @@ document.getElementById("theme").addEventListener("click", ()=>{
   root.dataset.theme = dark ? "light" : "dark";
   try{ localStorage.setItem("limette-tema", root.dataset.theme); }catch(e){}
 });
-
-if(reduce){ wheels[1].classList.add("show"); keys[1].classList.add("down"); }
-else loop();
 </script>
 </body>
 </html>
