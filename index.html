@@ -94,7 +94,8 @@ nav .btn.primary{background:var(--ink);color:var(--bg)}
 .hero .say{font-size:clamp(1rem, .7rem + 1.1svh, 1.22rem);line-height:1.4;max-width:34ch}
 /* o convite para brincar: uma pílula escura, para ninguém passar sem ver */
 .hero .try{font-size:.95rem;font-weight:600;display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap;background:#231d00;color:#fffbe6;padding:9px 12px 9px 18px;border-radius:999px;box-shadow:0 12px 26px -14px #000a;max-width:100%}
-@media (max-width:820px){.hero .try{border-radius:16px;padding:10px 14px;font-size:.9rem}}
+@media (max-width:820px){.hero .try{border-radius:16px;padding:9px 12px 9px 14px;font-size:.9rem}}
+.hero .try .ks{display:inline-flex;gap:4px;white-space:nowrap}
 .hero .try kbd{background:#f6d32d;border-color:#f6d32d;box-shadow:0 2px 0 #9d8410;color:#231d00;font-size:.85em;padding:2px 8px}
 /* arquivos soltos no pôster: arraste um e, sem soltar, aperte a tecla; a roda abre no cursor e soltar numa fatia cria o arquivo novo */
 .hf *{-webkit-user-drag:none}
@@ -112,6 +113,8 @@ nav .btn.primary{background:var(--ink);color:var(--bg)}
 .hf span{font:600 11.5px/1.2 -apple-system, "Segoe UI", system-ui, sans-serif;color:#231d00;background:#fffbe6e0;padding:2px 7px;border-radius:6px;width:max-content;max-width:124px;text-align:center;text-wrap:balance}
 .hf.new .th{animation:born .55s var(--ease)}
 @keyframes born{from{transform:scale(.3);opacity:0}}
+@media (max-width:820px){.hf,.htrash{width:80px}.hf .th,.htrash .bin{width:52px;height:52px}.hf .th-doc{width:42px}.hf.xm{display:none}}
+@media (max-width:379px){.keys{padding-right:80px;gap:10px}.keys b{font-size:.84rem}.hf,.htrash{width:72px}.hf .th,.htrash .bin{width:48px;height:48px}}
 /* lixeira: arraste um arquivo criado até ela, ou clique para apagar todos os criados */
 .htrash{position:absolute;left:0;top:0;z-index:3;width:88px;display:grid;justify-items:center;gap:6px;padding:4px;border:0;background:none;color:#231d00;cursor:pointer;transform:translate(var(--x,0px),var(--y,0px))}
 .htrash .bin{position:relative;width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:#fffbe6b0;box-shadow:0 10px 18px -10px #3a250a80, inset 0 0 0 1px #fffbe6;transition:transform .25s var(--ease), background .2s}
@@ -157,12 +160,16 @@ nav .btn.primary{background:var(--ink);color:var(--bg)}
 .keys kbd.press{transform:translateY(4px)!important;box-shadow:0 0 0 #000!important}
 .keys b{font-weight:700;font-size:.98rem;align-self:end;line-height:1.2}
 .keys small{font-size:.78rem;opacity:.7;align-self:start;line-height:1.3}
-/* celular: frase, a roda grande no meio, o nome embaixo dela, teclas e botão */
+/* celular: o nome no topo, a frase e o convite, a fileira de arquivos no meio, teclas e botão embaixo */
 @media (max-width:820px){
   .hero{padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+  .hero-grid{display:flex;flex-direction:column;gap:clamp(10px,1.8svh,18px)}
+  .hero .word{order:-1}
+  .hero .bottom{margin-top:auto;padding-top:112px}
   .hero .say{font-size:1rem}
   .hero h1{font-size:29.5vw}
-  .keys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%}
+  .keys{display:flex;flex-wrap:nowrap;gap:clamp(10px,4vw,20px);padding-right:92px}
+  .keys b{font-size:.9rem}
   .keys button{grid-template-columns:1fr;justify-items:start;row-gap:6px}
   .keys kbd{grid-row:auto}
   .keys small{display:none}
@@ -455,7 +462,7 @@ footer .big span{display:inline-block}
 <div class="hero" id="hero"><div class="hero-in g"><div class="wrap hero-grid">
   <div class="top">
     <p class="say" style="--i:0">Arraste um arquivo e aperte uma tecla: a roda aparece no cursor. Tudo no seu computador, sem mandar nada para a internet.</p>
-    <p class="try" style="--i:1" aria-hidden="true">Experimente: arraste um arquivo e, sem soltar, aperte <kbd>⇧</kbd> <kbd>⌘</kbd> ou <kbd>⌃</kbd></p>
+    <p class="try" style="--i:1" aria-hidden="true">Experimente: segure um arquivo e aperte <span class="ks"><kbd>⇧</kbd><kbd>⌘</kbd><kbd>⌃</kbd></span></p>
   </div>
   <div class="word" id="word">
   <h1 aria-label="Limette"><span class="ch" style="--i:0" aria-hidden="true">L</span><span class="ch" style="--i:1" aria-hidden="true">i</span><span class="ch" style="--i:2" aria-hidden="true">m</span><span class="ch" style="--i:3" aria-hidden="true">e</span><span class="ch" style="--i:4" aria-hidden="true">t</span><span class="ch" style="--i:5" aria-hidden="true">t</span><span class="ch" style="--i:6" aria-hidden="true">e</span></h1>
@@ -881,8 +888,8 @@ const TOUR = {
   const mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   const KEY = mac ? {Shift:0, Meta:1, Control:2} : {Shift:0, Control:1, Alt:2};
   const touch = matchMedia("(pointer:coarse)").matches;
-  hero.querySelector(".try").innerHTML = touch ? "Experimente: arraste um arquivo até uma fatia da roda"
-    : `Experimente: arraste um arquivo e, sem soltar, aperte ${mac ? "<kbd>⇧</kbd> <kbd>⌘</kbd> ou <kbd>⌃</kbd>" : "<kbd>Shift</kbd> <kbd>Ctrl</kbd> ou <kbd>Alt</kbd>"}`;
+  hero.querySelector(".try").innerHTML = touch ? "Experimente: arraste um arquivo até a roda"
+    : `Experimente: segure um arquivo e aperte <span class="ks">${mac ? "<kbd>⇧</kbd><kbd>⌘</kbd><kbd>⌃</kbd>" : "<kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>Alt</kbd>"}</span>`;
   let ptr = null;
   hero.addEventListener("pointermove", e => { if (e.pointerType === "mouse") { const r = hero.getBoundingClientRect(); ptr = [e.clientX - r.left, e.clientY - r.top]; } });
   hero.addEventListener("pointerleave", () => { ptr = null; });
@@ -937,16 +944,21 @@ const TOUR = {
   const pos = (el, x, y, r) => { el._x = x; el._y = y; el.style.setProperty("--x", x + "px"); el.style.setProperty("--y", y + "px"); if (r !== undefined) el.style.setProperty("--r", r + "deg"); };
   const fit = (x, y) => { const r = hero.getBoundingClientRect(); return [Math.max(0, Math.min(r.width - 92, x)), Math.max(70, Math.min(r.height - 150, y))]; };
   const originals = FILES.map(f => mk(f, f.name.split(".").pop())), trash = document.getElementById("htrash"), badge = trash.querySelector("b");
+  const keys = document.getElementById("legend");
+  originals[3].classList.add("xm"); // a música fica só no computador; no celular não cabe na fileira
   const layout = () => {
     const h = hero.getBoundingClientRect(), t = top.getBoundingClientRect().bottom - h.top, w = word.getBoundingClientRect().top - h.top, W = h.width;
     const desk = innerWidth > 820, base = t + Math.max(10, (w - t - 96) / 2), right = top.getBoundingClientRect().right - h.left;
+    // no celular: os três arquivos numa fileira e a lixeira no canto direito da linha das teclas
+    const kb = keys.querySelector("kbd").getBoundingClientRect(), kt = kb.top - h.top, cw = originals[0].offsetWidth || 80, gap = (W - 40 - 3 * cw) / 2;
+    const row = t + Math.max(8, (kt - t - 92) / 2), slot = i => 20 + i * (cw + gap);
     const spots = desk ? originals.map((_, i) => [W * [.06, .23, .4, .57][i], base + [18, -6, 30, 2][i]])
-      : originals.map((_, i) => [W * [.04, .37, .7, .18][i], t + (w - t - 90) * [.06, .14, .04, .62][i]]);
-    trash._x = desk ? right - 88 : W * .62; trash._y = desk ? base + 10 : t + (w - t - 90) * .66;
+      : originals.map((_, i) => [slot(Math.min(i, 2)), row]);
+    trash._x = desk ? right - 88 : W - 20 - trash.offsetWidth + 4; trash._y = desk ? base + 10 : kt + kb.height / 2 - trash.querySelector(".bin").offsetHeight / 2 - 4;
     trash.style.setProperty("--x", trash._x + "px"); trash.style.setProperty("--y", trash._y + "px");
     originals.forEach((el, i) => { el._home = spots[i]; });
     if (moved) return [...box.children].forEach(el => pos(el, ...fit(el._x, el._y)));
-    originals.forEach((el, i) => pos(el, ...spots[i], [-6, 4, -3, 7][i]));
+    originals.forEach((el, i) => pos(el, ...spots[i], desk ? [-6, 4, -3, 7][i] : 0));
   };
   new ResizeObserver(layout).observe(hero);
   document.fonts && document.fonts.ready.then(layout);
